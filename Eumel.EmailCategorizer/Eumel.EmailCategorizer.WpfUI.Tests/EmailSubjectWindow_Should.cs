@@ -53,6 +53,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
                 Subject = new EnhancedSubject("[Eumel] Regression Test Pattern")
             };
             window.Show();
+            Directory.CreateDirectory(Assets);
             CreateBitmapFromVisual(window, Assets + "eumel_subjecteditor.png");
             window.Hide();
             
