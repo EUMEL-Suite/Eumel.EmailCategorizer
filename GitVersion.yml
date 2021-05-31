@@ -4,10 +4,5 @@ assembly-file-versioning-format: '{Major}.{Minor}.{Patch}.{env:BUILD_BUILDID ?? 
 
 branches:
   master:
-    regex: ^master$ | ^main$
-    increment: Patch
-  feature:
-    regex: ^features?[/-]
-    increment: Patch
-    source-branches: ['main', 'feature']
-    track-merge-target: true
+    regex: ^main
+    increment: None
