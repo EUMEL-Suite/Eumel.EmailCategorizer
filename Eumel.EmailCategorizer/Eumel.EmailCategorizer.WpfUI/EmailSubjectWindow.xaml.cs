@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Eumel.EmailCategorizer.Outlook;
 
 namespace Eumel.EmailCategorizer.WpfUI
 {

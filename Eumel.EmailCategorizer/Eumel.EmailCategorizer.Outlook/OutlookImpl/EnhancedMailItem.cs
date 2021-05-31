@@ -1,7 +1,8 @@
 ﻿using System;
+using Eumel.EmailCategorizer.WpfUI;
 using Microsoft.Office.Interop.Outlook;
 
-namespace Eumel.EmailCategorizer.Outlook
+namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
 {
     internal class EnhancedMailItem
     {

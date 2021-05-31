@@ -1,4 +1,5 @@
-﻿using Eumel.EmailCategorizer.WpfUI;
+﻿using Eumel.EmailCategorizer.Outlook.OutlookImpl;
+using Eumel.EmailCategorizer.WpfUI;
 using Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 

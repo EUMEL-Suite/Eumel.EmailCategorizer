@@ -36,4 +36,4 @@ using System.Security;
 [assembly: AssemblyVersion("0.1.0.0")]
 [assembly: AssemblyFileVersion("0.1.0.0")]
 
-[assembly: AssemblyInformationalVersion("0.1.0-initial-addin-structure.1+1.Branch.feature-initial-addin-structure.Sha.18e680ce6df065763d0e20755598633c7d7f17cc")]
+[assembly: AssemblyInformationalVersion("0.1.0-initial-addin-structure.1+3.Branch.feature-initial-addin-structure.Sha.e27242baae0adc70c0864a3202ae6693a81ef3ab")]

@@ -1,4 +1,4 @@
-﻿namespace Eumel.EmailCategorizer.Outlook
+﻿namespace Eumel.EmailCategorizer.WpfUI
 {
     public class EnhancedSubject
     {

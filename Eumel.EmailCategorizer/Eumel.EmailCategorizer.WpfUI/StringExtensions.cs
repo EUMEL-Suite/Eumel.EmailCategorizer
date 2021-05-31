@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Eumel.EmailCategorizer.Outlook
+namespace Eumel.EmailCategorizer.WpfUI
 {
     internal static class StringExtensions
     {
