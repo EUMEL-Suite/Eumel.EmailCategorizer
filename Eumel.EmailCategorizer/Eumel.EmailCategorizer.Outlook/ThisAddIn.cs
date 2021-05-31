@@ -1,4 +1,6 @@
-﻿using Office = Microsoft.Office.Core;
+﻿using Eumel.EmailCategorizer.WpfUI;
+using Microsoft.Office.Interop.Outlook;
+using Office = Microsoft.Office.Core;
 
 namespace Eumel.EmailCategorizer.Outlook
 {
@@ -6,26 +8,38 @@ namespace Eumel.EmailCategorizer.Outlook
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            Application.ItemSend += Application_ItemSend;
         }
 
-        private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
+        private void Application_ItemSend(object item, ref bool cancel)
         {
-            // Note: Outlook no longer raises this event. If you have code that 
-            //    must run when Outlook shuts down, see https://go.microsoft.com/fwlink/?LinkId=506785
+            // since we only handle mail items
+            if (!(item is MailItem mail)) return;
+
+            var email = new EnhancedMailItem(mail);
+
+            var window = new EmailSubjectWindow()
+            {
+                Subject = email.Subject,
+            };
+            var dialogResult = window.ShowDialog();
+            if (dialogResult.HasValue && dialogResult.Value)
+            {
+                email.UpdateOriginalMail();
+            }
+            else
+            {
+                cancel = true;
+            }
         }
 
         #region VSTO generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InternalStartup()
         {
             Startup += ThisAddIn_Startup;
-            Shutdown += ThisAddIn_Shutdown;
         }
-        
+
         #endregion
     }
 }
