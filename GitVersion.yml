@@ -1,0 +1,13 @@
+mode: ContinuousDelivery
+assembly-versioning-format: '{Major}.{Minor}.{Patch}.{env:BUILD_BUILDID ?? 0}'
+assembly-file-versioning-format: '{Major}.{Minor}.{Patch}.{env:BUILD_BUILDID ?? 0}'
+
+branches:
+  master:
+    regex: ^master$ | ^main$
+    increment: Patch
+  feature:
+    regex: ^features?[/-]
+    increment: Patch
+    source-branches: ['main', 'feature']
+    track-merge-target: true
