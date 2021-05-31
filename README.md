@@ -1,2 +1,6 @@
-# Eumel.EmailCategorizer
-Outtlok-addin to categorize email with a prefix. This project was extracted from the Eumel Suite.
+# Eumel Email-Categorizer
+
+The EUMEL email categorizer is an outlook addin to tag or categorize email in its subject. The goal is sending email with an prefixed subject to
+categorize emails before it is sent.
+
+
