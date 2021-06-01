@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -18,7 +16,7 @@ using System.Security;
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
+[assembly: ComVisible(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("2ee991dc-6899-4bed-923d-80aec11939ca")]
@@ -36,4 +34,4 @@ using System.Security;
 [assembly: AssemblyVersion("0.1.2.0")]
 [assembly: AssemblyFileVersion("0.1.2.0")]
 
-[assembly: AssemblyInformationalVersion("0.1.2+Branch.feature-loadAndSaveCategories.Sha.f26c1045aebf247d2e0f52b457cd0a94f8b14475")]
+[assembly: AssemblyInformationalVersion("0.1.2-loadAndSaveCategories.1+2.Branch.feature-loadAndSaveCategories.Sha.6518f6a500e67cfa7601be19b687f3af511c993b")]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Eumel.EmailCategorizer.WpfUI
 {
@@ -33,6 +34,11 @@ namespace Eumel.EmailCategorizer.WpfUI
             var tmp = a;
             a = b;
             b = tmp;
+        }
+
+        public static string Implode(this IEnumerable<string> source, string separator)
+        {
+            return string.Join(separator, source);
         }
 
         #region static string wrappers

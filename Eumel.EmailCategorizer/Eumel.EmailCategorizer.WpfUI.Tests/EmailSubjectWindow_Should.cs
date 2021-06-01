@@ -1,10 +1,11 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Eumel.EmailCategorizer.Outlook.OutlookImpl;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Eumel.EmailCategorizer.WpfUI.Tests
@@ -48,9 +49,13 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
         [Apartment(ApartmentState.STA)]
         public void Open_Window()
         {
+            var categoryManager = Substitute.For<IEumelCategoryManager>();
+            categoryManager.Get().ReturnsForAnyArgs(new[] {"Categorizer", "Domse"});
+            
             var window = new EmailSubjectWindow()
             {
-                Subject = new EnhancedSubject("Fwd: [Eumel] Regression Test Pattern")
+                Subject = new EnhancedSubject("Fwd: [Eumel] Regression Test Pattern"),
+                CategoryManager = categoryManager
             };
             window.Show();
             Directory.CreateDirectory(Assets);
