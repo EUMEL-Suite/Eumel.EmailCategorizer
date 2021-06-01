@@ -15,18 +15,19 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Category" Margin="0 0 4 4" Grid.Column="0" Grid.Row="0"/>
-        <ComboBox x:Name="Category"  Margin="0 0 0 4" IsEditable="True" Grid.Column="1" Grid.Row="0" />
-        <CheckBox x:Name="AddToList" IsChecked="True" />
+        <TextBlock Text="Category" Margin="0 0 4 4" Grid.Column="0" Grid.Row="0" />
+        <ComboBox x:Name="Category" Margin="0 0 0 4" IsEditable="True" Grid.Column="1" Grid.Row="0" />
+        <CheckBox x:Name="AddToList" Margin="0 0 0 4" IsChecked="True" Grid.Column="1" Grid.Row="1" />
 
-        <TextBlock Text="Subject" Margin="0 0 4 4" Grid.Column="0" Grid.Row="1"/>
+        <TextBlock Text="Subject" Margin="0 0 4 4" Grid.Column="0" Grid.Row="1" />
         <TextBox x:Name="MailSubject" Grid.Column="1" Grid.Row="2" />
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Height="35">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4"
+                    Grid.ColumnSpan="2" Height="35">
             <Button Width="105" Click="CancelButton">Cancel</Button>
             <Button Width="105" Margin="4 0 0 0" Click="SendButton" IsDefault="True">Send</Button>
         </StackPanel>

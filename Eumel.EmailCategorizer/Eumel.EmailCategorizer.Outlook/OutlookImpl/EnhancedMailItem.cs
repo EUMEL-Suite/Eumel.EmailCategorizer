@@ -7,7 +7,6 @@ namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
     internal class EnhancedMailItem
     {
         private readonly MailItem _mail;
-        public EnhancedSubject Subject { get; }
 
         public EnhancedMailItem(MailItem mail)
         {
@@ -15,6 +14,8 @@ namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
 
             Subject = new EnhancedSubject(mail.Subject);
         }
+
+        public EnhancedSubject Subject { get; }
 
         public void UpdateOriginalMail()
         {

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
+
 <customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
   <backstage>
-    <tab id="eumelArea" label="Eumel" insertAfterMso="ApplicationOptionsDialog" visible="true" >
+    <tab id="eumelArea" label="Eumel" insertAfterMso="ApplicationOptionsDialog" visible="true">
       <firstColumn>
         <group id="grpOne" label="Group One">
           <primaryItem>
@@ -15,10 +16,10 @@
             </layoutContainer>
           </topItems>
         </group>
-        <group id="grpTwo" label="Group Two" >
+        <group id="grpTwo" label="Group Two">
           <primaryItem>
             <menu id="menuOne" label="Drop Down Menu">
-              <menuGroup id="menuGrpOne" >
+              <menuGroup id="menuGrpOne">
                 <button id="menuButtonOne" label="Menu Button" />
                 <button id="menuButtonTwo" label=" Menu Button" />
                 <checkBox id="chkBox" label="CheckBox" />
@@ -26,11 +27,10 @@
             </menu>
           </primaryItem>
           <topItems>
-            <editBox id="ebox3" label="Edit Box"/>
+            <editBox id="ebox3" label="Edit Box" />
           </topItems>
         </group>
       </firstColumn>
     </tab>
   </backstage>
 </customUI>
-

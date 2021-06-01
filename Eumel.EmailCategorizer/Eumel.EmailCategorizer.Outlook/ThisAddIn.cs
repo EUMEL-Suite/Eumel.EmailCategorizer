@@ -1,16 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using Eumel.EmailCategorizer.Outlook.OutlookImpl;
 using Eumel.EmailCategorizer.WpfUI;
+using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Outlook;
 
 namespace Eumel.EmailCategorizer.Outlook
 {
     public partial class ThisAddIn
     {
-        private IEumelStorage storage;
         private IEumelCategoryManager categoryManager;
-        
-        private void ThisAddIn_Startup(object sender, System.EventArgs e)
+        private IEumelStorage storage;
+
+        private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             Application.ItemSend += Application_ItemSend;
 
@@ -28,23 +29,19 @@ namespace Eumel.EmailCategorizer.Outlook
 
             var email = new EnhancedMailItem(mail);
 
-            var window = new EmailSubjectWindow()
+            var window = new EmailSubjectWindow
             {
                 Subject = email.Subject,
                 CategoryManager = categoryManager
             };
             var dialogResult = window.ShowDialog();
             if (dialogResult.HasValue && dialogResult.Value)
-            {
                 email.UpdateOriginalMail();
-            }
             else
-            {
                 cancel = true;
-            }
         }
 
-        protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
+        protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
             return new BackstageView();
         }

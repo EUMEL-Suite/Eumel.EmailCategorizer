@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
@@ -18,25 +17,23 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
 
         public static void CreateBitmapFromVisual(Visual target, string fileName)
         {
-            if (target == null || string.IsNullOrEmpty(fileName))
+            if (target == null || string.IsNullOrEmpty(fileName)) return;
+
+            var bounds = VisualTreeHelper.GetDescendantBounds(target);
+
+            var renderTarget =
+                new RenderTargetBitmap((int) bounds.Width, (int) bounds.Height, 96, 96, PixelFormats.Pbgra32);
+
+            var visual = new DrawingVisual();
+
+            using (var context = visual.RenderOpen())
             {
-                return;
-            }
-
-            Rect bounds = VisualTreeHelper.GetDescendantBounds(target);
-
-            RenderTargetBitmap renderTarget = new RenderTargetBitmap((Int32)bounds.Width, (Int32)bounds.Height, 96, 96, PixelFormats.Pbgra32);
-
-            DrawingVisual visual = new DrawingVisual();
-
-            using (DrawingContext context = visual.RenderOpen())
-            {
-                VisualBrush visualBrush = new VisualBrush(target);
+                var visualBrush = new VisualBrush(target);
                 context.DrawRectangle(visualBrush, null, new Rect(new Point(), bounds.Size));
             }
 
             renderTarget.Render(visual);
-            PngBitmapEncoder bitmapEncoder = new PngBitmapEncoder();
+            var bitmapEncoder = new PngBitmapEncoder();
             bitmapEncoder.Frames.Add(BitmapFrame.Create(renderTarget));
             using (Stream stm = File.Create(fileName))
             {
@@ -51,8 +48,8 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
         {
             var categoryManager = Substitute.For<IEumelCategoryManager>();
             categoryManager.Get().ReturnsForAnyArgs(new[] {"Categorizer", "Domse"});
-            
-            var window = new EmailSubjectWindow()
+
+            var window = new EmailSubjectWindow
             {
                 Subject = new EnhancedSubject("Fwd: [Eumel] Regression Test Pattern"),
                 CategoryManager = categoryManager
@@ -61,7 +58,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
             Directory.CreateDirectory(Assets);
             CreateBitmapFromVisual(window, Assets + "eumel_subjecteditor.png");
             window.Hide();
-            
+
             window.ShowDialog();
         }
     }

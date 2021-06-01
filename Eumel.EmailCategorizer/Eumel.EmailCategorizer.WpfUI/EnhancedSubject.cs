@@ -16,8 +16,8 @@
 
         public override string ToString()
         {
-            return Category.IsNullOrWhiteSpace() 
-                ? Subject 
+            return Category.IsNullOrWhiteSpace()
+                ? Subject
                 : $"{Opening}{Category}{Closing} {Subject}";
         }
 

@@ -1,7 +1,7 @@
 ﻿namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
 {
     /// <summary>
-    /// gets a specific configuration from a persistent store
+    ///     gets a specific configuration from a persistent store
     /// </summary>
     public interface IEumelStorage
     {

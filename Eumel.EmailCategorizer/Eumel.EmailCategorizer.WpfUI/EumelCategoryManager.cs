@@ -23,7 +23,7 @@ namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
             // get all without the category to add (ignore case)
             var existing = Get().Where(x => !string.Equals(x, category, StringComparison.CurrentCultureIgnoreCase));
 
-            var categories = existing.Concat(new[] { category }).OrderBy(x => x).Implode(CategorySeparator);
+            var categories = existing.Concat(new[] {category}).OrderBy(x => x).Implode(CategorySeparator);
             _storage[CategoryDataString] = categories;
         }
 
@@ -38,7 +38,7 @@ namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
         public IEnumerable<string> Get()
         {
             var result = (_storage[CategoryDataString] ?? string.Empty)
-                .Split(new[] { CategorySeparator }, StringSplitOptions.RemoveEmptyEntries);
+                .Split(new[] {CategorySeparator}, StringSplitOptions.RemoveEmptyEntries);
 
             return result;
         }
