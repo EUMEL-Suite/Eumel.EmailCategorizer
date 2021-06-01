@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.Office.Interop.Outlook;
 
 namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
@@ -21,14 +22,11 @@ namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
         {
             get
             {
-                if (_storage.Size != 0) return _storage.UserProperties[name].Value;
+                foreach (UserProperty item in _storage.UserProperties)
+                    if (string.Compare(name, item.Name, StringComparison.InvariantCultureIgnoreCase) == 0)
+                        return item.Value;
 
-                // empty init
-                _storage.UserProperties.Add(name, OlUserPropertyType.olText);
-                _storage.UserProperties[name].Value = string.Empty;
-                _storage.Save();
-
-                return _storage.UserProperties[name].Value;
+                return null;
             }
             set
             {

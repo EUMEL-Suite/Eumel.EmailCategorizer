@@ -1,9 +1,0 @@
-﻿<Application x:Class="Eumel.EmailCategorizer.WpfUI.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Eumel.EmailCategorizer.WpfUI"
-             StartupUri="EmailSubjectWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
-</Application>

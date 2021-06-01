@@ -14,9 +14,11 @@ namespace Eumel.EmailCategorizer.Outlook
         {
             Application.ItemSend += Application_ItemSend;
 
-            storage = new Task<IEumelStorage>(() =>
-                new OutlookEumelStorageItem(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox))).Result;
-            categoryManager = new Task<IEumelCategoryManager>(() => new EumelCategoryManager(storage)).Result;
+            //storage = new Task<IEumelStorage>(() =>
+            //    new OutlookEumelStorageItem(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox))).Result;
+            //categoryManager = new Task<IEumelCategoryManager>(() => new EumelCategoryManager(storage)).Result;
+            storage = new OutlookEumelStorageItem(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
+            categoryManager = new EumelCategoryManager(storage);
         }
 
         private void Application_ItemSend(object item, ref bool cancel)
