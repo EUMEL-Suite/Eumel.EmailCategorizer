@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab idMso="TabAddIns">
+        <group id="MyGroup"
+               label="My Group">
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+
+  <backstage>
+    <tab id="eumelArea" label="Eumel" insertAfterMso="ApplicationOptionsDialog" visible="true" >
+      <firstColumn>
+        <group id="grpOne" label="Group One">
+          <primaryItem>
+            <button id="btnButton" label="Button" imageMso="BevelShapeGallery" />
+          </primaryItem>
+          <topItems>
+            <layoutContainer id="layoutOne" layoutChildren="vertical">
+              <editBox id="ebox1" label="Edit Box" alignLabel="topRight" />
+              <button id="btnButton1" label="Button" imageMso="BevelShapeGallery" isDefinitive="true" />
+              <editBox id="ebox2" label="Edit Box" />
+            </layoutContainer>
+          </topItems>
+        </group>
+        <group id="grpTwo" label="Group Two" >
+          <primaryItem>
+            <menu id="menuOne" label="Drop Down Menu">
+              <menuGroup id="menuGrpOne" >
+                <button id="menuButtonOne" label="Menu Button" />
+                <button id="menuButtonTwo" label=" Menu Button" />
+                <checkBox id="chkBox" label="CheckBox" />
+              </menuGroup>
+            </menu>
+          </primaryItem>
+          <topItems>
+            <editBox id="ebox3" label="Edit Box"/>
+          </topItems>
+        </group>
+      </firstColumn>
+    </tab>
+  </backstage>
+</customUI>
+

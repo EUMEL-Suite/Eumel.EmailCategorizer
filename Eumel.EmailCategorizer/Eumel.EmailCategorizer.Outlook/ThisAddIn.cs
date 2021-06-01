@@ -1,7 +1,6 @@
 ﻿using Eumel.EmailCategorizer.Outlook.OutlookImpl;
 using Eumel.EmailCategorizer.WpfUI;
 using Microsoft.Office.Interop.Outlook;
-using Office = Microsoft.Office.Core;
 
 namespace Eumel.EmailCategorizer.Outlook
 {
@@ -32,6 +31,11 @@ namespace Eumel.EmailCategorizer.Outlook
             {
                 cancel = true;
             }
+        }
+
+        protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
+        {
+            return new BackstageView();
         }
 
         #region VSTO generated code
