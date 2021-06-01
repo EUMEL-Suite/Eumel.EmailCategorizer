@@ -2,33 +2,21 @@
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Eumel.EmailCategorizer.WpfUI;
 using Office = Microsoft.Office.Core;
-
-// TODO:  Follow these steps to enable the Ribbon (XML) item:
-
-// 1: Copy the following code block into the ThisAddin, ThisWorkbook, or ThisDocument class.
-
-//  protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
-//  {
-//      return new BackstageView();
-//  }
-
-// 2. Create callback methods in the "Ribbon Callbacks" region of this class to handle user
-//    actions, such as clicking a button. Note: if you have exported this Ribbon from the Ribbon designer,
-//    move your code from the event handlers to the callback methods and modify the code to work with the
-//    Ribbon extensibility (RibbonX) programming model.
-
-// 3. Assign attributes to the control tags in the Ribbon XML file to identify the appropriate callback methods in your code.  
-
-// For more information, see the Ribbon XML documentation in the Visual Studio Tools for Office Help.
-
 
 namespace Eumel.EmailCategorizer.Outlook
 {
     [ComVisible(true)]
     public class BackstageView : Office.IRibbonExtensibility
     {
+        private readonly Func<IEumelCategoryManager> _categoryManager;
         private Office.IRibbonUI ribbon;
+
+        public BackstageView(Func<IEumelCategoryManager> categoryManager)
+        {
+            _categoryManager = categoryManager ?? throw new ArgumentNullException(nameof(categoryManager));
+        }
 
         #region IRibbonExtensibility Members
 
@@ -46,6 +34,12 @@ namespace Eumel.EmailCategorizer.Outlook
         public void Ribbon_Load(Office.IRibbonUI ribbonUI)
         {
             ribbon = ribbonUI;
+        }
+
+        public void EditCategoriesClick(Office.IRibbonControl control)
+        {
+            var editWindow = new EditCategoriesWindow() { CategoryManager = _categoryManager() };
+            editWindow.ShowDialog();
         }
 
         #endregion

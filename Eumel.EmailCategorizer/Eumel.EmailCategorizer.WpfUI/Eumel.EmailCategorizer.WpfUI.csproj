@@ -50,10 +50,17 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditCategoriesWindow.xaml.cs">
+      <DependentUpon>EditCategoriesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EumelCategoryManager.cs" />
     <Compile Include="IEumelCategoryManager.cs" />
     <Compile Include="IEumelStorageItem.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Page Include="EditCategoriesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EmailSubjectWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -43,7 +43,7 @@ namespace Eumel.EmailCategorizer.Outlook
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
-            return new BackstageView();
+            return new BackstageView(()=> categoryManager);
         }
 
         #region VSTO generated code

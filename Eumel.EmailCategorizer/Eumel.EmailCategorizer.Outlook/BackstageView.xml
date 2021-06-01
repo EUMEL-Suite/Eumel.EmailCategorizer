@@ -2,33 +2,17 @@
 
 <customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
   <backstage>
-    <tab id="eumelArea" label="Eumel" insertAfterMso="ApplicationOptionsDialog" visible="true">
+    <tab id="eumelArea"
+         label="Eumel"
+         title="Eumel Add-In Configuration"
+         insertAfterMso="ApplicationOptionsDialog"
+         visible="true">
       <firstColumn>
-        <group id="grpOne" label="Group One">
+        <group id="categorizerLists" label="Category Management" helperText="Manage category list and reset counter">
           <primaryItem>
-            <button id="btnButton" label="Button" imageMso="BevelShapeGallery" />
+            <button id="editCategories" label="Edit" 
+                    onAction="EditCategoriesClick" imageMso="ListSetNumberingValue" />
           </primaryItem>
-          <topItems>
-            <layoutContainer id="layoutOne" layoutChildren="vertical">
-              <editBox id="ebox1" label="Edit Box" alignLabel="topRight" />
-              <button id="btnButton1" label="Button" imageMso="BevelShapeGallery" isDefinitive="true" />
-              <editBox id="ebox2" label="Edit Box" />
-            </layoutContainer>
-          </topItems>
-        </group>
-        <group id="grpTwo" label="Group Two">
-          <primaryItem>
-            <menu id="menuOne" label="Drop Down Menu">
-              <menuGroup id="menuGrpOne">
-                <button id="menuButtonOne" label="Menu Button" />
-                <button id="menuButtonTwo" label=" Menu Button" />
-                <checkBox id="chkBox" label="CheckBox" />
-              </menuGroup>
-            </menu>
-          </primaryItem>
-          <topItems>
-            <editBox id="ebox3" label="Edit Box" />
-          </topItems>
         </group>
       </firstColumn>
     </tab>
