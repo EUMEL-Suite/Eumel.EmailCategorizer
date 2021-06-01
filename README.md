@@ -7,9 +7,19 @@ categorize emails before it is sent.
 
 The email is written regilarily and can contain a category in brackets "[]". The subject is parsed for the category and added to the front of the subject.
 
-![Subject Editor](/Assets/eumel_mailsource.png?raw=true)
+![Subject Email](/Assets/eumel_mailsource.png?raw=true)
 
 After sending the email, a dialog is show which presents the category and the subject.
 
 ![Subject Editor](/Assets/eumel_subjecteditor.png?raw=true)
+
+# Configuration
+
+The configuration is put into a "backstage view" which cna be found underneath the "File" menu.
+
+![Configuration Entry](/Assets/eumel_configurationoverview.png?raw=true)
+
+The first option provides a dialog to edit the categories, which are stored during sending emails.
+
+![Subject Editor](/Assets/eumel_categoryeditor.png?raw=true)
 
