@@ -1,11 +1,12 @@
 ﻿using System;
+using Eumel.EmailCategorizer.WpfUI;
 using Microsoft.Office.Interop.Outlook;
 
 namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
 {
     public class OutlookEumelStorageItem : IEumelStorage
     {
-        private const string StorageIdentifier = "Eumel.EmailCategorizer";
+        private const string StorageIdentifier = "Eumel";
         private readonly StorageItem _storage;
 
         public OutlookEumelStorageItem(MAPIFolder folder)
@@ -29,7 +30,19 @@ namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
             }
             set
             {
-                _storage.UserProperties[name].Value = value;
+                var prop = (UserProperty)null;
+                
+                foreach (UserProperty item in _storage.UserProperties)
+                    if (string.Compare(name, item.Name, StringComparison.InvariantCultureIgnoreCase) == 0)
+                        prop = item;
+
+                if (prop == null)
+                {
+                    prop = _storage.UserProperties.Add(name, OlUserPropertyType.olText);
+                    _storage.Save();
+                }
+
+                prop.Value = value;
                 _storage.Save();
             }
         }

@@ -10,9 +10,9 @@
             Parse(subject ?? string.Empty);
         }
 
-        public string Category { get; private set; }
+        public string Category { get; set; }
 
-        public string Subject { get; private set; }
+        public string Subject { get; set; }
 
         public override string ToString()
         {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using Eumel.EmailCategorizer.Outlook.OutlookImpl;
 
 namespace Eumel.EmailCategorizer.WpfUI
 {
@@ -25,20 +24,19 @@ namespace Eumel.EmailCategorizer.WpfUI
 
         public EnhancedSubject Subject
         {
-            get => (EnhancedSubject) GetValue(SubjectProperty);
+            get => (EnhancedSubject)GetValue(SubjectProperty);
             set => SetValue(SubjectProperty, value);
         }
 
         public IEumelCategoryManager CategoryManager
         {
-            get => (IEumelCategoryManager) GetValue(CategoryManagerProperty);
+            get => (IEumelCategoryManager)GetValue(CategoryManagerProperty);
             set => SetValue(CategoryManagerProperty, value);
         }
 
         private static void SubjectChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var window = sender as EmailSubjectWindow ??
-                         throw new ArgumentNullException(nameof(sender), @"sender is not an EmailSubjectWindow");
+            var window = sender as EmailSubjectWindow ?? throw new ArgumentNullException(nameof(sender), @"sender is not an EmailSubjectWindow");
             var newValue = e.NewValue as EnhancedSubject ?? new EnhancedSubject("");
             window.Category.Text = newValue.Category;
             window.MailSubject.Text = newValue.Subject;
@@ -56,6 +54,14 @@ namespace Eumel.EmailCategorizer.WpfUI
 
         private void SendButton(object sender, RoutedEventArgs e)
         {
+            // update subject
+            Subject.Subject = MailSubject.Text.Trim();
+            Subject.Category = Category.Text.Trim();
+
+            // add value if needed
+            if (AddToList.IsChecked.HasValue && AddToList.IsChecked.Value && !Subject.Category.IsNullOrWhiteSpace())
+                CategoryManager.Add(Subject.Category);
+
             DialogResult = true;
             Close();
         }

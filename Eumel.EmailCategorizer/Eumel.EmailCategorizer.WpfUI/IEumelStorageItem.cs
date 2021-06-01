@@ -1,4 +1,4 @@
-﻿namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
+﻿namespace Eumel.EmailCategorizer.WpfUI
 {
     /// <summary>
     ///     gets a specific configuration from a persistent store

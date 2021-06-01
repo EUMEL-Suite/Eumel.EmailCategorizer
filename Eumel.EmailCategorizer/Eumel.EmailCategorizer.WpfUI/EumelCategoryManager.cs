@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Eumel.EmailCategorizer.WpfUI;
 
-namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
+namespace Eumel.EmailCategorizer.WpfUI
 {
     public class EumelCategoryManager : IEumelCategoryManager
     {
-        private const string CategoryDataString = "Categories";
+        private const string CategoryDataString = "Eumel.Categorizer.Categories";
         private const string CategorySeparator = "|";
         private readonly IEumelStorage _storage;
 
