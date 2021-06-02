@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Eumel.EmailCategorizer.WpfUI"
+        xmlns:wpfUi="clr-namespace:Eumel.EmailCategorizer.WpfUI"
+        d:DataContext="{d:DesignInstance Type=wpfUi:EditCategoriesWindow}" 
         mc:Ignorable="d"
-        Title="EUMEL Category Editor" Height="450" Width="800" d:DataContext="{d:DesignInstance }">
+        Title="EUMEL Category Editor" Height="450" Width="800">
     <Grid Margin="8">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -17,17 +18,12 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ListView Name="CategoryList" ItemsSource="{Binding Categories}" Grid.ColumnSpan="2" Margin="0 0 0 4">
+        <ListView Name="CategoryList" 
+                  ItemsSource="{Binding Path=Categories, Mode=OneWay}" 
+                  Grid.ColumnSpan="2" Margin="0 0 0 4">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn>
-                        <GridViewColumnHeader>Names</GridViewColumnHeader>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding .}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -39,8 +35,11 @@
             </ListView.View>
         </ListView>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"
-                        Grid.ColumnSpan="2" Height="35">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" Height="35">
+            <Button Width="105" Click="ClearAllButton">Clear</Button>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1" Height="35">
             <Button Width="105" Click="CancelButton">Cancel</Button>
             <Button Width="105" Margin="4 0 0 0" Click="SaveButton" IsDefault="True">Save</Button>
         </StackPanel>

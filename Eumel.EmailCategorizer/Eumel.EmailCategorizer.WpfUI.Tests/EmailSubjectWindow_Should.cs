@@ -46,7 +46,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
         public void Open_Window()
         {
             var categoryManager = Substitute.For<IEumelCategoryManager>();
-            categoryManager.Get().ReturnsForAnyArgs(new[] { "Categorizer", "Domse" });
+            categoryManager.Get().ReturnsForAnyArgs(new[] { "Categorizer", "Domse", "Foo1", "Foo2", "Bar1","Bar2" });
 
             var window = new EmailSubjectWindow
             {
@@ -64,21 +64,28 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
         [Test]
         [Explicit("this opens a UI")]
         [Apartment(ApartmentState.STA)]
-        public void Open_EditCategoriesWindow()
+        public void Open_EditCategoriesWindow_ClearAtLeastOne_Except_EumelCategories()
         {
+            var items = new[] {"Categorizer", "Domse", "CodeQualityCoach", "Training", "GitHub", "Protography"};
             var categoryManager = Substitute.For<IEumelCategoryManager>();
-            categoryManager.Get().ReturnsForAnyArgs(new[] { "Categorizer", "Domse" });
+            categoryManager.Get().ReturnsForAnyArgs(items);
 
             var window = new EditCategoriesWindow()
             {
                 CategoryManager = categoryManager
             };
+            
+            // lets create a screenshot
             window.Show();
             Directory.CreateDirectory(Assets);
             CreateBitmapFromVisual(window, Assets + "eumel_categoryeditor.png");
             window.Hide();
 
             window.ShowDialog();
+
+            categoryManager.Received().Add("Categorizer");
+            categoryManager.Received().Add("Domse");
+            categoryManager.Received().Delete("GitHub");
         }
     }
 }

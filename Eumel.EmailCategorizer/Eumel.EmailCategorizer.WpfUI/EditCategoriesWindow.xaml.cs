@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Eumel.EmailCategorizer.WpfUI
@@ -24,8 +26,9 @@ namespace Eumel.EmailCategorizer.WpfUI
                          throw new ArgumentNullException(nameof(sender), @"sender is not an EditCategoriesWindow");
             var newValue = e.NewValue as IEumelCategoryManager ?? throw new ArgumentNullException(nameof(e.NewValue));
 
-            window.CategoryList.ItemsSource = newValue.Get();
-            //newValue.Get().ToList().ForEach(x => window.CategoryList.Items.Add(x));
+            window.Categories = new ObservableCollection<CategoryModel>(
+                newValue.Get().Select(x => new CategoryModel() { Name = x }));
+            CommandManager.InvalidateRequerySuggested();
         }
 
         public IEumelCategoryManager CategoryManager
@@ -34,23 +37,45 @@ namespace Eumel.EmailCategorizer.WpfUI
             set => SetValue(CategoryManagerProperty, value);
         }
 
-        public IEnumerable<string> Categories => CategoryManager.Get();
 
-        #endregion
+        #endregion CategoryManager
+
+        #region Categories
+
+        public static readonly DependencyProperty CategoriesProperty = DependencyProperty.Register(
+            "Categories", typeof(ObservableCollection<CategoryModel>), typeof(EditCategoriesWindow), new PropertyMetadata(default(ObservableCollection<CategoryModel>)));
+
+        private readonly IList<CategoryModel> _deletedCategories = new List<CategoryModel>();
+
+        public ObservableCollection<CategoryModel> Categories
+        {
+            get => (ObservableCollection<CategoryModel>)GetValue(CategoriesProperty);
+            set => SetValue(CategoriesProperty, value);
+        }
+
+        #endregion Categories
 
         public EditCategoriesWindow()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
         private void CancelButton(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            DialogResult = false;
+            Close();
         }
 
         private void SaveButton(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            foreach (var item in Categories)
+                CategoryManager.Add(item.Name);
+            foreach (var item in _deletedCategories)
+                CategoryManager.Delete(item.Name);
+
+            DialogResult = true;
+            Close();
         }
 
         private void DeleteCategory(object sender, RoutedEventArgs e)
@@ -66,9 +91,13 @@ namespace Eumel.EmailCategorizer.WpfUI
                 return;
 
             int index = CategoryList.ItemContainerGenerator.IndexFromContainer(dep);
+            _deletedCategories.Add(Categories.ElementAt(index));
+            Categories.RemoveAt(index);
+        }
 
-            // TODO two way binding
-            //People.RemoveAt(index);
+        private void ClearAllButton(object sender, RoutedEventArgs e)
+        {
+            Categories.Clear();
         }
     }
 }

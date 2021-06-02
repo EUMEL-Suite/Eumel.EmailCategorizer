@@ -20,10 +20,10 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="Category" Margin="0 0 4 4" Grid.Column="0" Grid.Row="0" />
-        <ComboBox x:Name="Category" Margin="0 0 0 4" IsEditable="True" Grid.Column="1" Grid.Row="0" Text="add or update to list" />
-        <CheckBox x:Name="AddToList" Margin="0 0 0 4" IsChecked="True" Grid.Column="1" Grid.Row="1" />
+        <ComboBox x:Name="Category" Margin="0 0 0 4" IsEditable="True" Grid.Column="1" Grid.Row="0" />
+        <CheckBox x:Name="AddToList" Margin="0 0 0 4" IsChecked="True" Grid.Column="1" Grid.Row="1">add or update to list</CheckBox>
 
-        <TextBlock Text="Subject" Margin="0 0 4 4" Grid.Column="0" Grid.Row="1" />
+        <TextBlock Text="Subject" Margin="0 0 4 4" Grid.Column="0" Grid.Row="2" />
         <TextBox x:Name="MailSubject" Grid.Column="1" Grid.Row="2" />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4"

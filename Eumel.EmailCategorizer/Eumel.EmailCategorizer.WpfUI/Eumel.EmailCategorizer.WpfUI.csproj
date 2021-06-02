@@ -50,6 +50,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryModel.cs" />
     <Compile Include="EditCategoriesWindow.xaml.cs">
       <DependentUpon>EditCategoriesWindow.xaml</DependentUpon>
     </Compile>
