@@ -1,6 +1,7 @@
 ﻿using System;
 using Eumel.EmailCategorizer.Outlook.OutlookImpl;
 using Eumel.EmailCategorizer.WpfUI;
+using Eumel.EmailCategorizer.WpfUI.CategoryManager;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Outlook;
 
@@ -8,18 +9,16 @@ namespace Eumel.EmailCategorizer.Outlook
 {
     public partial class ThisAddIn
     {
-        private IEumelCategoryManager categoryManager;
-        private IEumelStorage storage;
+        private IEumelCategoryManager _categoryManager;
+        private IEumelStorage _storage;
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             Application.ItemSend += Application_ItemSend;
 
-            //storage = new Task<IEumelStorage>(() =>
-            //    new OutlookEumelStorageItem(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox))).Result;
-            //categoryManager = new Task<IEumelCategoryManager>(() => new EumelCategoryManager(storage)).Result;
-            storage = new OutlookEumelStorageItem(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
-            categoryManager = new EumelCategoryManager(storage);
+            //_storage = new OutlookEumelStorageItem(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
+            _storage = new FileEumelStorage();
+            _categoryManager = new EumelCategoryManager(_storage);
         }
 
         private void Application_ItemSend(object item, ref bool cancel)
@@ -32,18 +31,27 @@ namespace Eumel.EmailCategorizer.Outlook
             var window = new EmailSubjectWindow
             {
                 Subject = email.Subject,
-                CategoryManager = categoryManager
+                CategoryManager = _categoryManager
             };
+            
             var dialogResult = window.ShowDialog();
-            if (dialogResult.HasValue && dialogResult.Value)
-                email.UpdateOriginalMail();
-            else
-                cancel = true;
+            switch (dialogResult)
+            {
+                case true:
+                    email.UpdateOriginalMail();
+                    break;
+                case false:
+                    cancel = true;
+                    break;
+                default:
+                    cancel = true;
+                    break;
+            }
         }
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
-            return new BackstageView(()=> categoryManager);
+            return new BackstageView(()=> _categoryManager);
         }
 
         #region VSTO generated code

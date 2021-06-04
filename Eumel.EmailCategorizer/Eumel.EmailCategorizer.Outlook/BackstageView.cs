@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Eumel.EmailCategorizer.WpfUI;
+using Eumel.EmailCategorizer.WpfUI.CategoryManager;
 using Office = Microsoft.Office.Core;
 
 namespace Eumel.EmailCategorizer.Outlook

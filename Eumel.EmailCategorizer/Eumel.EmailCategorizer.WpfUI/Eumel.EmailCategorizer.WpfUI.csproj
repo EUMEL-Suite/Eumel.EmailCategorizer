@@ -50,13 +50,15 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoryModel.cs" />
+    <Compile Include="CategoryManager\CategoryModel.cs" />
+    <Compile Include="CategoryManager\EmptyEumelStorage.cs" />
+    <Compile Include="CategoryManager\FileEumelStorage.cs" />
     <Compile Include="EditCategoriesWindow.xaml.cs">
       <DependentUpon>EditCategoriesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EumelCategoryManager.cs" />
-    <Compile Include="IEumelCategoryManager.cs" />
-    <Compile Include="IEumelStorageItem.cs" />
+    <Compile Include="CategoryManager\EumelCategoryManager.cs" />
+    <Compile Include="CategoryManager\IEumelCategoryManager.cs" />
+    <Compile Include="CategoryManager\IEumelStorageItem.cs" />
     <Compile Include="StringExtensions.cs" />
     <Page Include="EditCategoriesWindow.xaml">
       <SubType>Designer</SubType>
@@ -95,5 +97,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

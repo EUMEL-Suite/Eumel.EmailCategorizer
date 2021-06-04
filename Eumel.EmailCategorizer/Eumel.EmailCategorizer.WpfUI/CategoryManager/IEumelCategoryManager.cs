@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eumel.EmailCategorizer.WpfUI
+namespace Eumel.EmailCategorizer.WpfUI.CategoryManager
 {
     public interface IEumelCategoryManager
     {

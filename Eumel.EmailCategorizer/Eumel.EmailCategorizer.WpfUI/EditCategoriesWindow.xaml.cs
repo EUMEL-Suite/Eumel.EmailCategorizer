@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Eumel.EmailCategorizer.WpfUI.CategoryManager;
 
 namespace Eumel.EmailCategorizer.WpfUI
 {

@@ -1,4 +1,4 @@
-﻿namespace Eumel.EmailCategorizer.WpfUI
+﻿namespace Eumel.EmailCategorizer.WpfUI.CategoryManager
 {
     public class CategoryModel
     {

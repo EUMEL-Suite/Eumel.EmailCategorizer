@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using Eumel.EmailCategorizer.WpfUI.CategoryManager;
 
 namespace Eumel.EmailCategorizer.WpfUI
 {
