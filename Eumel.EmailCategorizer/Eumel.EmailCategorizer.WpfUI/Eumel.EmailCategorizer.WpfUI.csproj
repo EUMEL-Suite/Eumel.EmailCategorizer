@@ -39,6 +39,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -54,7 +57,6 @@
     <Compile Include="Manager\EumelAggregateCategoryManager.cs" />
     <Compile Include="Manager\EumelConfigManager.cs" />
     <Compile Include="Manager\IEumelConfigManager.cs" />
-    <Compile Include="Manager\IHaveConfigSettings.cs" />
     <Compile Include="Manager\IHaveCoreSettings.cs" />
     <Compile Include="Model\CategoryModel.cs" />
     <Compile Include="Model\ConfigModel.cs" />
@@ -100,6 +102,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

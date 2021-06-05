@@ -5,7 +5,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
 {
     public class CoreSettingsManager : IHaveCoreSettings
     {
-        private const string ConfigStoreDataString = "Eumel.Categorizer.ConfigStore";
+        private const string ConfigStorePrefix = "Eumel.Categorizer.";
         private readonly IEumelStorage _storage;
 
         public CoreSettingsManager(IEumelStorage storage)
@@ -16,8 +16,8 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
 
         public string ConfigStore
         {
-            get => _storage[ConfigStoreDataString];
-            set => _storage[ConfigStoreDataString] = value;
+            get => _storage[ConfigStorePrefix + nameof(ConfigStore)];
+            set => _storage[ConfigStorePrefix + nameof(ConfigStore)] = value;
         }
 
     }

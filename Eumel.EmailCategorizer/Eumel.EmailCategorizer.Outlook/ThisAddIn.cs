@@ -36,8 +36,9 @@ namespace Eumel.EmailCategorizer.Outlook
             Application.ItemSend += Application_ItemSend;
 
             // the information about the config store needs to be hard coded somehow
-            var tmpStore = new OutlookEumelStorage(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
-            IHaveCoreSettings tmpManager = new CoreSettingsManager(tmpStore);
+            //var tmpStore = new OutlookEumelStorage(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
+            var tmpStore = new JsonFileEumelStorage();
+            var tmpManager = new CoreSettingsManager(tmpStore) as IHaveCoreSettings;
 
             _storage = BuildEumelStorage(tmpManager, () => Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
             _categoryManager = new EumelCategoryManager(_storage);
