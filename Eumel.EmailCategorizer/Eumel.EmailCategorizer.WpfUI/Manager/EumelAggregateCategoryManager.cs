@@ -41,7 +41,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
         public IEnumerable<string> Get()
         {
             var result = new List<string>(_readWriteStorage.Get());
-            foreach (var manager in _readStorageCache.Keys)
+            foreach (var manager in _readStorageCache.Keys.ToArray())
             {
                 var tmp = manager.Get().ToArray();
                 result.AddRange(tmp);

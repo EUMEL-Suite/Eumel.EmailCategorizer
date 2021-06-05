@@ -40,8 +40,13 @@ namespace Eumel.EmailCategorizer.Outlook
             var tmpStore = new JsonFileEumelStorage();
             var tmpManager = new EumelConfigManager(tmpStore) as IEumelConfigManager;
 
-            _storage = BuildEumelStorage(tmpManager, () => Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
-            _categoryManager = new EumelCategoryManager(_storage);
+            _storage = BuildEumelStorage(
+                tmpManager, 
+                () => Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
+            _categoryManager = new EumelAggregateCategoryManager(
+                _storage,
+                new OutlookEumelStorage(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox)));
+            //_categoryManager = new EumelCategoryManager(_storage);
             _configManager = new EumelConfigManager(_storage);
         }
 
