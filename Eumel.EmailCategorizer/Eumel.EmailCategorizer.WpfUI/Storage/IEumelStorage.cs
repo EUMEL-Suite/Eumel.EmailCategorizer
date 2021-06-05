@@ -1,4 +1,4 @@
-﻿namespace Eumel.EmailCategorizer.WpfUI.CategoryManager
+﻿namespace Eumel.EmailCategorizer.WpfUI.Storage
 {
     /// <summary>
     ///     gets a specific configuration from a persistent store

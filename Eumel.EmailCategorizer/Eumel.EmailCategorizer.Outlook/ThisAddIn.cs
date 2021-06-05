@@ -1,7 +1,8 @@
 ﻿using System;
 using Eumel.EmailCategorizer.Outlook.OutlookImpl;
 using Eumel.EmailCategorizer.WpfUI;
-using Eumel.EmailCategorizer.WpfUI.CategoryManager;
+using Eumel.EmailCategorizer.WpfUI.Manager;
+using Eumel.EmailCategorizer.WpfUI.Storage;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Outlook;
 

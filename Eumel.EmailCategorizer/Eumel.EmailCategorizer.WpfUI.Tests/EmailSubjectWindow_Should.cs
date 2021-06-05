@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Eumel.EmailCategorizer.WpfUI.CategoryManager;
+using Eumel.EmailCategorizer.WpfUI.Manager;
 using NSubstitute;
 using NUnit.Framework;
 

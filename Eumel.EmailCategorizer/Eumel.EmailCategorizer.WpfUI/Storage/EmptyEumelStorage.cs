@@ -1,4 +1,4 @@
-﻿namespace Eumel.EmailCategorizer.WpfUI.CategoryManager
+﻿namespace Eumel.EmailCategorizer.WpfUI.Storage
 {
     public class EmptyEumelStorage : IEumelStorage
     {
