@@ -11,15 +11,37 @@ namespace Eumel.EmailCategorizer.Outlook
     public partial class ThisAddIn
     {
         private IEumelCategoryManager _categoryManager;
+        private IEumelConfigManager _configManager;
         private IEumelStorage _storage;
+
+        private static IEumelStorage BuildEumelStorage(IHaveCoreSettings settings, Func<MAPIFolder> getMapiFolder)
+        {
+            var store = settings.ConfigStore;
+
+            switch (store)
+            {
+                case nameof(FileEumelStorage):
+                    return new FileEumelStorage();
+                case nameof(JsonFileEumelStorage):
+                    return new JsonFileEumelStorage();
+                case nameof(OutlookEumelStorage):
+                    return new OutlookEumelStorage(getMapiFolder());
+                default:
+                    return new EmptyEumelStorage();
+            }
+        }
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             Application.ItemSend += Application_ItemSend;
 
-            //_storage = new OutlookEumelStorageItem(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
-            _storage = new FileEumelStorage();
+            // the information about the config store needs to be hard coded somehow
+            var tmpStore = new OutlookEumelStorage(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
+            IHaveCoreSettings tmpManager = new CoreSettingsManager(tmpStore);
+
+            _storage = BuildEumelStorage(tmpManager, () => Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
             _categoryManager = new EumelCategoryManager(_storage);
+            _configManager = new EumelConfigManager(_storage);
         }
 
         private void Application_ItemSend(object item, ref bool cancel)
@@ -34,7 +56,7 @@ namespace Eumel.EmailCategorizer.Outlook
                 Subject = email.Subject,
                 CategoryManager = _categoryManager
             };
-            
+
             var dialogResult = window.ShowDialog();
             switch (dialogResult)
             {
@@ -52,7 +74,7 @@ namespace Eumel.EmailCategorizer.Outlook
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
-            return new BackstageView(()=> _categoryManager);
+            return new BackstageView(() => _categoryManager);
         }
 
         #region VSTO generated code

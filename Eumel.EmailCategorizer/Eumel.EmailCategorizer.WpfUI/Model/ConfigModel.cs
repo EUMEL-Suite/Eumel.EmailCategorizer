@@ -8,5 +8,6 @@ namespace Eumel.EmailCategorizer.WpfUI.Model
         public IEnumerable<CategoryModel> Categories { get; set; }
         public IEnumerable<string> ForwardMarker { get; set; }
         public IEnumerable<string> ReplyMarker { get; set; }
+        public string ConfigStore { get; set; }
     }
 }

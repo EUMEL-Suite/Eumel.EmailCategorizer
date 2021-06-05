@@ -189,7 +189,7 @@
   <ItemGroup>
     <Compile Include="BackstageView.cs" />
     <Compile Include="OutlookImpl\EnhancedMailItem.cs" />
-    <Compile Include="OutlookImpl\OutlookEumelStorageItem.cs" />
+    <Compile Include="OutlookImpl\OutlookEumelStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

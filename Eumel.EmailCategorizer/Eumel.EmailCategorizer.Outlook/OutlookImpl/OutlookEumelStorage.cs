@@ -5,12 +5,12 @@ using Microsoft.Office.Interop.Outlook;
 
 namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
 {
-    public class OutlookEumelStorageItem : IEumelStorage
+    public class OutlookEumelStorage : IEumelStorage
     {
         private const string StorageIdentifier = "Eumel";
         private readonly StorageItem _storage;
 
-        public OutlookEumelStorageItem(MAPIFolder folder)
+        public OutlookEumelStorage(MAPIFolder folder)
         {
             if (folder == null) throw new ArgumentNullException(nameof(folder));
 

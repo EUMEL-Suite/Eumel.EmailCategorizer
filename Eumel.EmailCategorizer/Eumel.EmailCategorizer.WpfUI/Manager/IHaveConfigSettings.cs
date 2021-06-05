@@ -3,7 +3,7 @@ using Eumel.EmailCategorizer.WpfUI.Model;
 
 namespace Eumel.EmailCategorizer.WpfUI.Manager
 {
-    public interface IHaveConfigSettings
+    public interface IHaveConfigSettings : IHaveCoreSettings
     {
         IEnumerable<string> ForwardMarker { get; set; }
         IEnumerable<string> ReplyMarker { get; set; }

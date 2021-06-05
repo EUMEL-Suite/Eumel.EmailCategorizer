@@ -2,6 +2,6 @@
 {
     public interface IEumelConfigManager : IHaveConfigSettings
     {
-        
+
     }
 }
