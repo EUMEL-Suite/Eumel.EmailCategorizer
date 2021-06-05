@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Eumel.EmailCategorizer.WpfUI.Manager;
 using Eumel.EmailCategorizer.WpfUI.Storage;
 
 namespace Eumel.EmailCategorizer.WpfUI.Model
 {
-    public class ConfigModel : IHaveCoreSettings
+    public class ConfigModel
     {
         public IEnumerable<CategoryModel> Categories { get; set; }
         public IEnumerable<string> ForwardMarker { get; set; }

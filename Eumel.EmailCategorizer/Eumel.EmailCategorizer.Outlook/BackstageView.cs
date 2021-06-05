@@ -12,11 +12,13 @@ namespace Eumel.EmailCategorizer.Outlook
     public class BackstageView : Office.IRibbonExtensibility
     {
         private readonly Func<IEumelCategoryManager> _categoryManager;
+        private readonly Func<IEumelConfigManager> _configManager;
         private Office.IRibbonUI ribbon;
 
-        public BackstageView(Func<IEumelCategoryManager> categoryManager)
+        public BackstageView(Func<IEumelCategoryManager> categoryManager,Func<IEumelConfigManager> configManager)
         {
             _categoryManager = categoryManager ?? throw new ArgumentNullException(nameof(categoryManager));
+            _configManager = configManager ?? throw new ArgumentNullException(nameof(configManager));
         }
 
         #region IRibbonExtensibility Members

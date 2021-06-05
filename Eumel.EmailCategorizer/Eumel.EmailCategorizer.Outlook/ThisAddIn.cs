@@ -14,7 +14,7 @@ namespace Eumel.EmailCategorizer.Outlook
         private IEumelConfigManager _configManager;
         private IEumelStorage _storage;
 
-        private static IEumelStorage BuildEumelStorage(IHaveCoreSettings settings, Func<MAPIFolder> getMapiFolder)
+        private static IEumelStorage BuildEumelStorage(IEumelConfigManager settings, Func<MAPIFolder> getMapiFolder)
         {
             var store = settings.ConfigStore;
 
@@ -38,7 +38,7 @@ namespace Eumel.EmailCategorizer.Outlook
             // the information about the config store needs to be hard coded somehow
             //var tmpStore = new OutlookEumelStorage(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
             var tmpStore = new JsonFileEumelStorage();
-            var tmpManager = new CoreSettingsManager(tmpStore) as IHaveCoreSettings;
+            var tmpManager = new EumelConfigManager(tmpStore) as IEumelConfigManager;
 
             _storage = BuildEumelStorage(tmpManager, () => Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
             _categoryManager = new EumelCategoryManager(_storage);
@@ -75,7 +75,7 @@ namespace Eumel.EmailCategorizer.Outlook
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
-            return new BackstageView(() => _categoryManager);
+            return new BackstageView(() => _categoryManager, ()=> _configManager);
         }
 
         #region VSTO generated code

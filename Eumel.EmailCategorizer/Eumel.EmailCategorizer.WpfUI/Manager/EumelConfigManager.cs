@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Eumel.EmailCategorizer.WpfUI.Model;
 using Eumel.EmailCategorizer.WpfUI.Storage;
 
 namespace Eumel.EmailCategorizer.WpfUI.Manager

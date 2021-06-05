@@ -53,11 +53,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Manager\CoreSettingsManager.cs" />
     <Compile Include="Manager\EumelAggregateCategoryManager.cs" />
     <Compile Include="Manager\EumelConfigManager.cs" />
     <Compile Include="Manager\IEumelConfigManager.cs" />
-    <Compile Include="Manager\IHaveCoreSettings.cs" />
     <Compile Include="Model\CategoryModel.cs" />
     <Compile Include="Model\ConfigModel.cs" />
     <Compile Include="Storage\EmptyEumelStorage.cs" />
