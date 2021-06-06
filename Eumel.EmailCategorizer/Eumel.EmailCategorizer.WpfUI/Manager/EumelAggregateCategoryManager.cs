@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Eumel.EmailCategorizer.WpfUI.Storage;
 
 namespace Eumel.EmailCategorizer.WpfUI.Manager
@@ -19,6 +20,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
         }
 
         public bool IsReadOnly => _readWriteStorage != null;
+        public IEumelCategoryManager ReadWriteManager => _readWriteStorage;
 
         public void Add(string category)
         {
@@ -40,6 +42,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
 
         public IEnumerable<string> Get()
         {
+            // TODO I should use the cache here...
             var result = new List<string>(_readWriteStorage.Get());
             foreach (var manager in _readStorageCache.Keys.ToArray())
             {
@@ -48,7 +51,8 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
                 _readStorageCache[manager] = tmp;
             }
 
-            return result;
+            // TODO this can be made more fancy
+            return result.Distinct().OrderBy(x => x).ToArray();
         }
     }
 }

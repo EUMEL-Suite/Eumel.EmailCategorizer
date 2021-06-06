@@ -8,28 +8,27 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
 {
     [TestFixture]
     // ReSharper disable once InconsistentNaming
-    public class EmailSubjectWindow_Should : WpfWindowBaseTest
+    public class EditSettingsWindow_Should : WpfWindowBaseTest
     {
         [Test]
         [Explicit("this opens a UI")]
         [Apartment(ApartmentState.STA)]
         public void Open_Window()
         {
-            var categoryManager = Substitute.For<IEumelCategoryManager>();
-            categoryManager.Get().ReturnsForAnyArgs(new[] { "Categorizer", "Domse", "Foo1", "Foo2", "Bar1", "Bar2" });
+            var configManager = Substitute.For<IEumelConfigManager>();
+            configManager.ReplyMarker.ReturnsForAnyArgs(new[] { "RE:", "AW:" });
+            configManager.ForwardMarker.ReturnsForAnyArgs(new[] { "FW:", "WG:" });
 
-            var window = new EmailSubjectWindow
+            var window = new EditSettingsWindow()
             {
-                Subject = new EnhancedSubject("Fwd: [Eumel] Regression Test Pattern"),
-                CategoryManager = categoryManager
+                ConfigManager = configManager
             };
             window.Show();
             Directory.CreateDirectory(Assets);
-            CreateBitmapFromVisual(window, Assets + "eumel_subjecteditor.png");
+            CreateBitmapFromVisual(window, Assets + "eumel_editsettings.png");
             window.Hide();
 
             window.ShowDialog();
         }
-
     }
 }

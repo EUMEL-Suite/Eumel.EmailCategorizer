@@ -45,6 +45,12 @@ namespace Eumel.EmailCategorizer.Outlook
             editWindow.ShowDialog();
         }
 
+        public void ChangeSettingsClick(Office.IRibbonControl control)
+        {
+            var editWindow = new EditSettingsWindow() { ConfigManager = _configManager() };
+            editWindow.ShowDialog();
+        }
+
         #endregion
 
         #region Helpers

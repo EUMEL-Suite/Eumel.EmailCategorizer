@@ -10,7 +10,7 @@ namespace Eumel.EmailCategorizer.Outlook
 {
     public partial class ThisAddIn
     {
-        private IEumelCategoryManager _categoryManager;
+        private EumelAggregateCategoryManager _categoryManager;
         private IEumelConfigManager _configManager;
         private IEumelStorage _storage;
 
@@ -80,7 +80,7 @@ namespace Eumel.EmailCategorizer.Outlook
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
-            return new BackstageView(() => _categoryManager, ()=> _configManager);
+            return new BackstageView(() => _categoryManager.ReadWriteManager, ()=> _configManager);
         }
 
         #region VSTO generated code

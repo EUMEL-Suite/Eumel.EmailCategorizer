@@ -10,8 +10,14 @@
       <firstColumn>
         <group id="categorizerLists" label="Category Management" helperText="Manage category list and reset counter">
           <primaryItem>
-            <button id="editCategories" label="Edit" 
+            <button id="editCategories" label="Edit"
                     onAction="EditCategoriesClick" imageMso="ListSetNumberingValue" />
+          </primaryItem>
+        </group>
+        <group id="settingsLists" label="Settings Management" helperText="Manage settings for list sources">
+          <primaryItem>
+            <button id="changeSettings" label="Edit"
+                    onAction="ChangeSettingsClick" imageMso="OmsViewAccountSetting" />
           </primaryItem>
         </group>
       </firstColumn>

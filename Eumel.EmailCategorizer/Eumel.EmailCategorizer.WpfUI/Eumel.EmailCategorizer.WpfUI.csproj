@@ -53,6 +53,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditSettingsWindow.xaml.cs">
+      <DependentUpon>EditSettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\EumelAggregateCategoryManager.cs" />
     <Compile Include="Manager\EumelConfigManager.cs" />
     <Compile Include="Manager\IEumelConfigManager.cs" />
@@ -69,6 +72,10 @@
     <Compile Include="Storage\JsonFileEumelStorage.cs" />
     <Compile Include="StringExtensions.cs" />
     <Page Include="EditCategoriesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
