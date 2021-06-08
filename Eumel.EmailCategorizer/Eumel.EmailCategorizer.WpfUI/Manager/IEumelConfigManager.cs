@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
+using Eumel.EmailCategorizer.WpfUI.Model;
 
 namespace Eumel.EmailCategorizer.WpfUI.Manager
 {
     public interface IEumelConfigManager
     {
-        IEnumerable<string> ForwardMarker { get; set; }
-        IEnumerable<string> ReplyMarker { get; set; }
-        string ConfigStore { get; set; }
+        ConfigModel GetConfig();
     }
 }

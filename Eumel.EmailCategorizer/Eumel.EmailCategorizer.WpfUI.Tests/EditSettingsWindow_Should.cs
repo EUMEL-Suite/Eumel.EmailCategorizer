@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using Eumel.EmailCategorizer.WpfUI.Manager;
+using Eumel.EmailCategorizer.WpfUI.Model;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -17,33 +19,35 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
         public void Open_Window()
         {
             var configManager = Substitute.For<IEumelConfigManager>();
-            configManager.ReplyMarker.ReturnsForAnyArgs(new[] { "RE:", "AW:" });
-            configManager.ForwardMarker.ReturnsForAnyArgs(new[] { "FW:", "WG:" });
+            configManager.GetConfig().ReturnsForAnyArgs(new ConfigModel()
+            {
+                ReplyMarker = new List<string>() {"RE:", "AW:"},
+                ForwardMarker = new List<string>() {"FW:", "WG:"}
+            });
 
             var window = new EditSettingsWindow()
             {
-                ConfigManager = configManager
+                Config = new ConfigModel() { ConfigStore = "Hello"}
             };
-            window.Show();
-            Directory.CreateDirectory(Assets);
-            CreateBitmapFromVisual(window, Assets + "eumel_editsettings.png");
-            window.Hide();
-
             window.ShowDialog();
         }
-        
+
         [Test]
         [Apartment(ApartmentState.STA)]
         public void Open_Window_And_Make_ScreenShot()
         {
             var configManager = Substitute.For<IEumelConfigManager>();
-            configManager.ReplyMarker.ReturnsForAnyArgs(new[] { "RE:", "AW:" });
-            configManager.ForwardMarker.ReturnsForAnyArgs(new[] { "FW:", "WG:" });
+            configManager.GetConfig().ReturnsForAnyArgs(new ConfigModel()
+            {
+                ReplyMarker = new List<string>() {"RE:", "AW:"},
+                ForwardMarker = new List<string>() {"FW:", "WG:"}
+            });
 
             var window = new EditSettingsWindow()
             {
-                ConfigManager = configManager
+                Config = new ConfigModel()// configManager
             };
+
             window.Show();
             Directory.CreateDirectory(Assets);
             CreateBitmapFromVisual(window, Assets + "eumel_editsettings.png");

@@ -15,7 +15,7 @@ namespace Eumel.EmailCategorizer.Outlook
         private readonly Func<IEumelConfigManager> _configManager;
         private Office.IRibbonUI ribbon;
 
-        public BackstageView(Func<IEumelCategoryManager> categoryManager,Func<IEumelConfigManager> configManager)
+        public BackstageView(Func<IEumelCategoryManager> categoryManager, Func<IEumelConfigManager> configManager)
         {
             _categoryManager = categoryManager ?? throw new ArgumentNullException(nameof(categoryManager));
             _configManager = configManager ?? throw new ArgumentNullException(nameof(configManager));
@@ -47,7 +47,7 @@ namespace Eumel.EmailCategorizer.Outlook
 
         public void ChangeSettingsClick(Office.IRibbonControl control)
         {
-            var editWindow = new EditSettingsWindow() { ConfigManager = _configManager() };
+            var editWindow = new EditSettingsWindow() { Config = _configManager().GetConfig() };
             editWindow.ShowDialog();
         }
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Eumel.EmailCategorizer.WpfUI.Model;
 using Eumel.EmailCategorizer.WpfUI.Storage;
 
 namespace Eumel.EmailCategorizer.WpfUI.Manager
@@ -15,22 +17,16 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
             _storage = storage ?? throw new ArgumentNullException(nameof(storage));
         }
 
-        public string ConfigStore
+        public ConfigModel GetConfig()
         {
-            get => _storage[ConfigStorePrefix + nameof(ConfigStore)];
-            set => _storage[ConfigStorePrefix + nameof(ConfigStore)] = value;
-        }
-
-        public IEnumerable<string> ForwardMarker
-        {
-            get => _storage[ConfigStorePrefix + nameof(ForwardMarker)].Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
-            set => _storage[ConfigStorePrefix + nameof(ForwardMarker)] = string.Join(Separator, value);
-        }
-
-        public IEnumerable<string> ReplyMarker
-        {
-            get => _storage[ConfigStorePrefix + nameof(ReplyMarker)].Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
-            set => _storage[ConfigStorePrefix + nameof(ReplyMarker)] = string.Join(Separator, value);
+            return new ConfigModel()
+            {
+                ConfigStore = _storage[ConfigStorePrefix + nameof(ConfigModel.ConfigStore)],
+                ForwardMarker = (_storage[ConfigStorePrefix + nameof(ConfigModel.ForwardMarker)] ?? string.Empty)
+                    .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                ReplyMarker = (_storage[ConfigStorePrefix + nameof(ConfigModel.ReplyMarker)] ?? string.Empty)
+                    .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries).ToList()
+            };
         }
     }
 }

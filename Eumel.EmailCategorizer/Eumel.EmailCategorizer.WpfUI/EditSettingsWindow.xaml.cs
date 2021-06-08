@@ -1,42 +1,46 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Input;
-using Eumel.EmailCategorizer.WpfUI.Manager;
+﻿using System.Windows;
+using Eumel.EmailCategorizer.WpfUI.Model;
 
 namespace Eumel.EmailCategorizer.WpfUI
 {
     /// <summary>
     /// Interaction logic for EditSettingsWindow.xaml
     /// </summary>
-    public partial class EditSettingsWindow : Window
+    public partial class EditSettingsWindow
     {
-        #region ConfigManager
+        #region Config
 
-        public static readonly DependencyProperty ConfigManagerProperty = DependencyProperty.Register(
-            "ConfigManager", typeof(IEumelConfigManager), typeof(EditCategoriesWindow),
-            new PropertyMetadata(default(IEumelConfigManager), ConfigManagerChanged));
+        public static readonly DependencyProperty ConfigProperty = DependencyProperty.Register(
+            "Config", typeof(ConfigModel), typeof(EditSettingsWindow), new PropertyMetadata(default(ConfigModel), PropertyChangedCallback));
 
-        private static void ConfigManagerChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var window = sender as EditCategoriesWindow ??
-                         throw new ArgumentNullException(nameof(sender), @"sender is not an EditCategoriesWindow");
-            var newValue = e.NewValue as IEumelConfigManager ?? throw new ArgumentNullException(nameof(e.NewValue));
+            var window = d as EditSettingsWindow;
+            var newValue = e.NewValue as ConfigModel;
 
-            CommandManager.InvalidateRequerySuggested();
+            window.PropertyEditor.SelectedObject = newValue;
         }
 
-        public IEumelConfigManager ConfigManager
+        public ConfigModel Config
         {
-            get => (IEumelConfigManager)GetValue(ConfigManagerProperty);
-            set => SetValue(ConfigManagerProperty, value);
+            get => (ConfigModel)GetValue(ConfigProperty);
+            set => SetValue(ConfigProperty, value);
         }
 
+        #endregion Config
 
-        #endregion ConfigManager
-        
         public EditSettingsWindow()
         {
             InitializeComponent();
+        }
+
+        private void CancelButton(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void SaveButton(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

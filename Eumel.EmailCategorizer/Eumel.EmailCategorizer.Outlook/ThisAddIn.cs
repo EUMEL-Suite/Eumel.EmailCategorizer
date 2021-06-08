@@ -16,7 +16,7 @@ namespace Eumel.EmailCategorizer.Outlook
 
         private static IEumelStorage BuildEumelStorage(IEumelConfigManager settings, Func<MAPIFolder> getMapiFolder)
         {
-            var store = settings.ConfigStore;
+            var store = settings.GetConfig().ConfigStore;
 
             switch (store)
             {

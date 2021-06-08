@@ -5,9 +5,9 @@ namespace Eumel.EmailCategorizer.WpfUI.Model
 {
     public class ConfigModel
     {
-        public IEnumerable<CategoryModel> Categories { get; set; }
-        public IEnumerable<string> ForwardMarker { get; set; }
-        public IEnumerable<string> ReplyMarker { get; set; }
+        public List<string> ForwardMarker { get; set; }
+        public List<string> ReplyMarker { get; set; }
+        
         public string ConfigStore { get; set; }
 
         public static ConfigModel Default()
@@ -15,8 +15,8 @@ namespace Eumel.EmailCategorizer.WpfUI.Model
             return new ConfigModel()
             {
                 ConfigStore = nameof(JsonFileEumelStorage),
-                ReplyMarker = new []{"RE:", "AW:"},
-                ForwardMarker = new []{"FW:","WG:"}
+                ReplyMarker = new List<string>() {"RE:", "AW:"},
+                ForwardMarker = new List<string>() {"FW:", "WG:"}
             };
         }
     }
