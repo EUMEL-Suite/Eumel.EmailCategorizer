@@ -7,6 +7,11 @@ namespace Eumel.EmailCategorizer.WpfUI.Model
     {
         public List<string> ForwardMarker { get; set; }
         public List<string> ReplyMarker { get; set; }
+        public bool UseOutlookPst { get; set; }
+        public bool UsePlainFileStorage { get; set; }
+        public bool UseJsonFileStorage { get; set; }
+        public bool UseHttpSource { get; set; }
+        public string HttpSource { get; set; }
         
         public string ConfigStore { get; set; }
 

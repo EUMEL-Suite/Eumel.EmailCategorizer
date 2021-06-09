@@ -25,8 +25,24 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
                 ForwardMarker = (_storage[ConfigStorePrefix + nameof(ConfigModel.ForwardMarker)] ?? string.Empty)
                     .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries).ToList(),
                 ReplyMarker = (_storage[ConfigStorePrefix + nameof(ConfigModel.ReplyMarker)] ?? string.Empty)
-                    .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries).ToList()
+                    .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries).ToList(),
+                UseHttpSource = bool.Parse(_storage[ConfigStorePrefix + nameof(ConfigModel.UseHttpSource)] ?? "false"),
+                UseJsonFileStorage = bool.Parse(_storage[ConfigStorePrefix + nameof(ConfigModel.UseJsonFileStorage)] ?? "true"),
+                UseOutlookPst = bool.Parse(_storage[ConfigStorePrefix + nameof(ConfigModel.UseOutlookPst)] ?? "false"),
+                UsePlainFileStorage = bool.Parse(_storage[ConfigStorePrefix + nameof(ConfigModel.UsePlainFileStorage)] ?? "false"),
+                HttpSource = _storage[ConfigStorePrefix + nameof(ConfigModel.HttpSource)]
             };
+        }
+
+        public void Save(ConfigModel config)
+        {
+            _storage[ConfigStorePrefix + nameof(ConfigModel.ForwardMarker)] = string.Join(Separator, config.ForwardMarker);
+            _storage[ConfigStorePrefix + nameof(ConfigModel.ReplyMarker)] = string.Join(Separator, config.ReplyMarker);
+            _storage[ConfigStorePrefix + nameof(ConfigModel.UseHttpSource)] = config.UseHttpSource.ToString();
+            _storage[ConfigStorePrefix + nameof(ConfigModel.UseJsonFileStorage)] = config.UseJsonFileStorage.ToString();
+            _storage[ConfigStorePrefix + nameof(ConfigModel.UseOutlookPst)] = config.UseOutlookPst.ToString();
+            _storage[ConfigStorePrefix + nameof(ConfigModel.UsePlainFileStorage)] = config.UsePlainFileStorage.ToString();
+            _storage[ConfigStorePrefix + nameof(ConfigModel.HttpSource)] = config.HttpSource;
         }
     }
 }

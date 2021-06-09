@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
 
         <xctk:PropertyGrid Name="PropertyEditor" AutoGenerateProperties="True"
-                           ShowSearchBox="False" ShowSortOptions="False" ShowTitle="False"
+                           ShowSearchBox="True" ShowSortOptions="True" ShowTitle="False"
                            Grid.ColumnSpan="2" Margin="0 0 0 4">
         </xctk:PropertyGrid>
 

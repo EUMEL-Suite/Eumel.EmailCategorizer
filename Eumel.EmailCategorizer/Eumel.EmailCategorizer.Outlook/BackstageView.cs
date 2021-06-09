@@ -47,7 +47,7 @@ namespace Eumel.EmailCategorizer.Outlook
 
         public void ChangeSettingsClick(Office.IRibbonControl control)
         {
-            var editWindow = new EditSettingsWindow() { Config = _configManager().GetConfig() };
+            var editWindow = new EditSettingsWindow() { Manager = _configManager()};
             editWindow.ShowDialog();
         }
 
