@@ -2,11 +2,13 @@
 {
     public class EnhancedSubject
     {
+        private string _originalSubject;
         private const string Opening = "[";
         private const string Closing = "]";
 
         public EnhancedSubject(string subject)
         {
+            _originalSubject = subject;
             Parse(subject ?? string.Empty);
         }
 
@@ -31,6 +33,12 @@
                 .Replace(Opening + Category + Closing, "")
                 .Trim()
                 .Replace("  ", " ").Replace("  ", " "); // replace all multiple spaces.
+        }
+
+        public void UndoParse()
+        {
+            Category = string.Empty;
+            Subject = _originalSubject;
         }
     }
 }

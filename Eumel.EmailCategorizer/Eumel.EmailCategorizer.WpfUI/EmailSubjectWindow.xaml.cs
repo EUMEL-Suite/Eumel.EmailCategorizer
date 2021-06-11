@@ -33,7 +33,7 @@ namespace Eumel.EmailCategorizer.WpfUI
         #endregion
 
         #region CategoryManager
-        
+
         public static readonly DependencyProperty CategoryManagerProperty = DependencyProperty.Register(
             "CategoryManager", typeof(IEumelCategoryManager), typeof(EmailSubjectWindow),
             new PropertyMetadata(default(IEumelCategoryManager), CategoryManagerChanged));
@@ -79,6 +79,12 @@ namespace Eumel.EmailCategorizer.WpfUI
         {
             DialogResult = false;
             Close();
+        }
+
+        private void UndoParse(object sender, RoutedEventArgs e)
+        {
+            Subject.UndoParse();
+            SubjectChanged(this, new DependencyPropertyChangedEventArgs(SubjectProperty, Subject, Subject));
         }
     }
 }
