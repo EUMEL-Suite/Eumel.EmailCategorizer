@@ -73,9 +73,13 @@
     </Compile>
     <Compile Include="Manager\EumelAggregateCategoryManager.cs" />
     <Compile Include="Manager\EumelConfigManager.cs" />
+    <Compile Include="Manager\EumelConfigManagerExtensions.cs" />
     <Compile Include="Manager\IEumelConfigManager.cs" />
+    <Compile Include="Manager\InitConfigManager.cs" />
     <Compile Include="Model\CategoryModel.cs" />
     <Compile Include="Model\ConfigModel.cs" />
+    <Compile Include="Storage\HttpEumelStorage.cs" />
+    <Compile Include="Storage\RegistryEumelStorage.cs" />
     <Compile Include="Storage\EmptyEumelStorage.cs" />
     <Compile Include="Storage\FileEumelStorage.cs" />
     <Compile Include="EditCategoriesWindow.xaml.cs">

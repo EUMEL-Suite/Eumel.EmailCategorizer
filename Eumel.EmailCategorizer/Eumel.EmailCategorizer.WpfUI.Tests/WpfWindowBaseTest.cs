@@ -7,7 +7,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
 {
     public class WpfWindowBaseTest
     {
-        protected const string Assets = "C:\\Workspaces\\Eumel.EmailCategorizer\\Assets\\";
+        protected const string Assets = "C:\\Workspace.Eumel\\Eumel.EmailCategorizer\\Assets\\";
 
         protected static void CreateBitmapFromVisual(Visual target, string fileName)
         {

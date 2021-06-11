@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using Eumel.EmailCategorizer.WpfUI.Storage;
 
 namespace Eumel.EmailCategorizer.WpfUI.Manager
 {
     public class EumelAggregateCategoryManager : IEumelCategoryManager
     {
+
         private readonly IEumelCategoryManager _readWriteStorage;
         private readonly IDictionary<IEumelCategoryManager, IEnumerable<string>> _readStorageCache;
 
-        public EumelAggregateCategoryManager(IEumelStorage readWriteStorage = null, params IEumelStorage[] readStorage)
+        public EumelAggregateCategoryManager(IEumelStorage readWriteStorage, params IEumelStorage[] readStorage)
         {
-            _readWriteStorage = new EumelCategoryManager(readWriteStorage ?? new EmptyEumelStorage());
+            if (readWriteStorage == null) throw new ArgumentNullException(nameof(readWriteStorage));
+
+            _readWriteStorage = new EumelCategoryManager(readWriteStorage);
             _readStorageCache = (readStorage ?? Enumerable.Empty<IEumelStorage>())
                 .Select(x => new EumelCategoryManager(x))
                 .ToDictionary(x => (IEumelCategoryManager)x, x => Enumerable.Empty<string>());
+            _readStorageCache.Add(_readWriteStorage, Enumerable.Empty<string>());
         }
 
         public bool IsReadOnly => _readWriteStorage != null;
@@ -43,7 +46,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
         public IEnumerable<string> Get()
         {
             // TODO I should use the cache here...
-            var result = new List<string>(_readWriteStorage.Get());
+            var result = new List<string>();
             foreach (var manager in _readStorageCache.Keys.ToArray())
             {
                 var tmp = manager.Get().ToArray();

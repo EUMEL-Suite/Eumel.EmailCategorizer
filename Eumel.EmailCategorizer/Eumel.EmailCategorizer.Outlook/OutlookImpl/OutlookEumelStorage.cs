@@ -1,5 +1,4 @@
 ﻿using System;
-using Eumel.EmailCategorizer.WpfUI;
 using Eumel.EmailCategorizer.WpfUI.Storage;
 using Microsoft.Office.Interop.Outlook;
 

@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using Eumel.EmailCategorizer.Outlook.OutlookImpl;
 using Eumel.EmailCategorizer.WpfUI;
 using Eumel.EmailCategorizer.WpfUI.Manager;
+using Eumel.EmailCategorizer.WpfUI.Model;
 using Eumel.EmailCategorizer.WpfUI.Storage;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Outlook;
+using Microsoft.Win32;
 
 namespace Eumel.EmailCategorizer.Outlook
 {
@@ -13,41 +16,45 @@ namespace Eumel.EmailCategorizer.Outlook
         private EumelAggregateCategoryManager _categoryManager;
         private IEumelConfigManager _configManager;
         private IEumelStorage _storage;
+        private ConfigModel _config;
 
-        private static IEumelStorage BuildEumelStorage(IEumelConfigManager settings, Func<MAPIFolder> getMapiFolder)
-        {
-            var store = settings.GetConfig().ConfigStore;
+        private readonly Dictionary<string, Func<string, IEumelStorage>> _storageFactories =
+            new Dictionary<string, Func<string, IEumelStorage>>();
 
-            switch (store)
-            {
-                case nameof(FileEumelStorage):
-                    return new FileEumelStorage();
-                case nameof(JsonFileEumelStorage):
-                    return new JsonFileEumelStorage();
-                case nameof(OutlookEumelStorage):
-                    return new OutlookEumelStorage(getMapiFolder());
-                default:
-                    return new EmptyEumelStorage();
-            }
-        }
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             Application.ItemSend += Application_ItemSend;
+            InitStorageFactory();
 
-            // the information about the config store needs to be hard coded somehow
-            //var tmpStore = new OutlookEumelStorage(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
-            var tmpStore = new JsonFileEumelStorage();
-            var tmpManager = new EumelConfigManager(tmpStore) as IEumelConfigManager;
+            // reading config store backend from registry
+            var initSettingsStorage = new RegistryEumelStorage();
+            var initSettings = new InitConfigManager(initSettingsStorage);
 
-            _storage = BuildEumelStorage(
-                tmpManager, 
-                () => Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox));
-            _categoryManager = new EumelAggregateCategoryManager(
-                _storage,
-                new OutlookEumelStorage(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox)));
-            //_categoryManager = new EumelCategoryManager(_storage);
+            // get storage for application data and config settings
+            if (string.IsNullOrWhiteSpace(initSettings.ConfigStore) || !_storageFactories.ContainsKey(initSettings.ConfigStore))
+            {
+                initSettings.ConfigStore = nameof(JsonFileEumelStorage);
+                initSettings.ConfigStoreSettings = string.Empty;
+            }
+
+            _storage = _storageFactories[initSettings.ConfigStore](initSettings.ConfigStoreSettings);
             _configManager = new EumelConfigManager(_storage);
+            _config = _configManager.GetConfig();
+
+            _categoryManager = new EumelAggregateCategoryManager(
+                _config.GetWriteStorage(_storageFactories),
+                _config.GetReadStorages(_storageFactories));
+        }
+
+        private void InitStorageFactory()
+        {
+            _storageFactories.Add(nameof(FileEumelStorage), c => new FileEumelStorage(c));
+            _storageFactories.Add(nameof(JsonFileEumelStorage), c => new JsonFileEumelStorage(c));
+            _storageFactories.Add(nameof(RegistryEumelStorage), c => new RegistryEumelStorage());
+            _storageFactories.Add(nameof(HttpEumelStorage), c => new HttpEumelStorage(c));
+            _storageFactories.Add(nameof(OutlookEumelStorage), c => new OutlookEumelStorage(Application.Session.GetDefaultFolder(OlDefaultFolders.olFolderInbox)));
+            _storageFactories.Add(string.Empty, c => new EmptyEumelStorage());
         }
 
         private void Application_ItemSend(object item, ref bool cancel)
@@ -80,7 +87,7 @@ namespace Eumel.EmailCategorizer.Outlook
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
-            return new BackstageView(() => _categoryManager.ReadWriteManager, ()=> _configManager);
+            return new BackstageView(() => _categoryManager.ReadWriteManager, () => _configManager);
         }
 
         #region VSTO generated code

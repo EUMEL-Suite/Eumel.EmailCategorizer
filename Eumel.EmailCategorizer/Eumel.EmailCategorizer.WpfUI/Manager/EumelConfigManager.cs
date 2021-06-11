@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Eumel.EmailCategorizer.WpfUI.Model;
 using Eumel.EmailCategorizer.WpfUI.Storage;
+using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace Eumel.EmailCategorizer.WpfUI.Manager
 {
@@ -21,7 +21,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
         {
             return new ConfigModel()
             {
-                ConfigStore = _storage[ConfigStorePrefix + nameof(ConfigModel.ConfigStore)],
+                // TODO MAKE THIS GENERIC
                 ForwardMarker = (_storage[ConfigStorePrefix + nameof(ConfigModel.ForwardMarker)] ?? string.Empty)
                     .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries).ToList(),
                 ReplyMarker = (_storage[ConfigStorePrefix + nameof(ConfigModel.ReplyMarker)] ?? string.Empty)
@@ -30,12 +30,14 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
                 UseJsonFileStorage = bool.Parse(_storage[ConfigStorePrefix + nameof(ConfigModel.UseJsonFileStorage)] ?? "true"),
                 UseOutlookPst = bool.Parse(_storage[ConfigStorePrefix + nameof(ConfigModel.UseOutlookPst)] ?? "false"),
                 UsePlainFileStorage = bool.Parse(_storage[ConfigStorePrefix + nameof(ConfigModel.UsePlainFileStorage)] ?? "false"),
-                HttpSource = _storage[ConfigStorePrefix + nameof(ConfigModel.HttpSource)]
+                HttpSource = _storage[ConfigStorePrefix + nameof(ConfigModel.HttpSource)],
+                WriteStorage = _storage[ConfigStorePrefix + nameof(ConfigModel.WriteStorage)]
             };
         }
 
         public void Save(ConfigModel config)
         {
+            // TODO MAKE THIS GENERIC
             _storage[ConfigStorePrefix + nameof(ConfigModel.ForwardMarker)] = string.Join(Separator, config.ForwardMarker);
             _storage[ConfigStorePrefix + nameof(ConfigModel.ReplyMarker)] = string.Join(Separator, config.ReplyMarker);
             _storage[ConfigStorePrefix + nameof(ConfigModel.UseHttpSource)] = config.UseHttpSource.ToString();
@@ -43,6 +45,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
             _storage[ConfigStorePrefix + nameof(ConfigModel.UseOutlookPst)] = config.UseOutlookPst.ToString();
             _storage[ConfigStorePrefix + nameof(ConfigModel.UsePlainFileStorage)] = config.UsePlainFileStorage.ToString();
             _storage[ConfigStorePrefix + nameof(ConfigModel.HttpSource)] = config.HttpSource;
+            _storage[ConfigStorePrefix + nameof(ConfigModel.WriteStorage)] = config.WriteStorage;
         }
     }
 }

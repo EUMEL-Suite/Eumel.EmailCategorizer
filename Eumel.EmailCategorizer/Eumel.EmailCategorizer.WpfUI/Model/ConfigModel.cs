@@ -12,14 +12,17 @@ namespace Eumel.EmailCategorizer.WpfUI.Model
         public bool UseJsonFileStorage { get; set; }
         public bool UseHttpSource { get; set; }
         public string HttpSource { get; set; }
-        
-        public string ConfigStore { get; set; }
+        public string StorageFolder { get; set; }
+        public string WriteStorage { get; set; }
 
         public static ConfigModel Default()
         {
             return new ConfigModel()
             {
-                ConfigStore = nameof(JsonFileEumelStorage),
+                WriteStorage = nameof(JsonFileEumelStorage),
+                UseOutlookPst = false,
+                UsePlainFileStorage = false,
+                UseHttpSource = false,
                 ReplyMarker = new List<string>() {"RE:", "AW:"},
                 ForwardMarker = new List<string>() {"FW:", "WG:"}
             };
