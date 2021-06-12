@@ -78,6 +78,7 @@
     <Compile Include="Manager\InitConfigManager.cs" />
     <Compile Include="Model\CategoryModel.cs" />
     <Compile Include="Model\ConfigModel.cs" />
+    <Compile Include="Storage\EumelStorageWriteSources.cs" />
     <Compile Include="Storage\HttpEumelStorage.cs" />
     <Compile Include="Storage\RegistryEumelStorage.cs" />
     <Compile Include="Storage\EmptyEumelStorage.cs" />

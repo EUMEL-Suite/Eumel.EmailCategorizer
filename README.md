@@ -20,5 +20,9 @@ The configuration is put into a "backstage view" which cna be found underneath t
 
 The first option provides a dialog to edit the categories, which are stored during sending emails.
 
-![Subject Editor](/Assets/eumel_categoryeditor.png?raw=true)
+![Categories Editor](/Assets/eumel_categoryeditor.png?raw=true)
+
+The second option provides a dialog to edit the settings
+
+![Settings Editor](/Assets/eumel_settingseditor.png?raw=true)
 

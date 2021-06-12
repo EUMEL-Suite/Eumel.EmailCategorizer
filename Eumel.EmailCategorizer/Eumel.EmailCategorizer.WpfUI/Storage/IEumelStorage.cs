@@ -1,4 +1,9 @@
-﻿namespace Eumel.EmailCategorizer.WpfUI.Storage
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
+
+namespace Eumel.EmailCategorizer.WpfUI.Storage
 {
     /// <summary>
     /// gets a specific configuration from a persistent store.
