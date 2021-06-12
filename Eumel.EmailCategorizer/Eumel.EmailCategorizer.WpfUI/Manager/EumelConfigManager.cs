@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Eumel.EmailCategorizer.WpfUI.Model;
 using Eumel.EmailCategorizer.WpfUI.Storage;
 using Xceed.Wpf.Toolkit.Core.Converters;
@@ -39,18 +41,29 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
 
         public void Save(ConfigModel config)
         {
-            // TODO MAKE THIS GENERIC
-            _storage[ConfigStorePrefix + nameof(ConfigModel.ForwardMarker)] = string.Join(Separator, config.ForwardMarker);
-            _storage[ConfigStorePrefix + nameof(ConfigModel.ReplyMarker)] = string.Join(Separator, config.ReplyMarker);
-            _storage[ConfigStorePrefix + nameof(ConfigModel.CategoryPrefix)] = string.Join(Separator, config.CategoryPrefix);
-            _storage[ConfigStorePrefix + nameof(ConfigModel.CategoryPostfix)] = string.Join(Separator, config.CategoryPostfix);
+            // for string we just store it 1:1
+            var props = config.GetType()
+                .GetProperties()
+                .Where(x => x.PropertyType == typeof(string));
+            foreach (var info in props)
+            {
+                var name = info.Name;
+                var value = info.GetValue(config) as string;
 
-            _storage[ConfigStorePrefix + nameof(ConfigModel.UseHttpSource)] = config.UseHttpSource.ToString();
-            _storage[ConfigStorePrefix + nameof(ConfigModel.UseJsonFileStorage)] = config.UseJsonFileStorage.ToString();
-            _storage[ConfigStorePrefix + nameof(ConfigModel.UseOutlookPst)] = config.UseOutlookPst.ToString();
-            _storage[ConfigStorePrefix + nameof(ConfigModel.UsePlainFileStorage)] = config.UsePlainFileStorage.ToString();
-            _storage[ConfigStorePrefix + nameof(ConfigModel.HttpSource)] = config.HttpSource;
-            _storage[ConfigStorePrefix + nameof(ConfigModel.WriteStorage)] = config.WriteStorage;
+                _storage[ConfigStorePrefix + name] = value;
+            }
+
+            // for lists, we need to convert it
+            props = config.GetType()
+                .GetProperties()
+                .Where(x => x.PropertyType == typeof(List<string>));
+            foreach (var info in props)
+            {
+                var name = info.Name;
+                var value = (info.GetValue(config) as List<string>) ?? Enumerable.Empty<string>();
+
+                _storage[ConfigStorePrefix + name] = string.Join(Separator, value);
+            }
         }
     }
 }

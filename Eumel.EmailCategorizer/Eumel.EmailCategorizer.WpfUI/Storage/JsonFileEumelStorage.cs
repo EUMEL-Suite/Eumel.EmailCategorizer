@@ -13,8 +13,9 @@ namespace Eumel.EmailCategorizer.WpfUI.Storage
 
         public JsonFileEumelStorage(string storageFolder = null)
         {
-            var defaultValue = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EUMEL Suite");
-            var folder = Environment.ExpandEnvironmentVariables(storageFolder ?? defaultValue);
+            var folder = Environment.ExpandEnvironmentVariables(storageFolder ?? string.Empty);
+            if (folder.IsNullOrWhiteSpace())
+                folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EUMEL Suite"); ;
 
             Directory.CreateDirectory(folder);
             _filename = Path.Combine(folder, ConfigFile);

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.Win32;
 using NUnit.Framework;
@@ -6,27 +7,38 @@ using NUnit.Framework;
 namespace Eumel.EmailCategorizer.WpfUI.Tests
 {
     [TestFixture]
-    public class RegistryAccessTests
+    public class RegistryEnvironmentAccessTests
     {
         [Test]
-        public void Test()
+        public void RegistryAccessTests()
         {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\EUMEL Suite");
+            var key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\EUMEL Suite");
             if (key.GetValueNames().Contains("Temp"))
                 key.DeleteValue("Temp");
             var store = key.GetValue("Temp") as string;
-            store.Should().BeNull();
+            _ = store.Should().BeNull();
             key.SetValue("Temp", "JsonFileEumelStorage");
-            key.GetValueNames().Contains("Temp").Should().BeTrue();
+            _ = key.GetValueNames().Contains("Temp").Should().BeTrue();
             key.Close();
 
             key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\EUMEL Suite");
             store = key.GetValue("Temp") as string;
-            store.Should().Be("JsonFileEumelStorage");
+            _ = store.Should().Be("JsonFileEumelStorage");
 
             key.DeleteValue("Temp");
             key.GetValueNames().Contains("Temp").Should().BeFalse();
             key.Close();
+        }
+
+        [Test]
+        public void EnvironmentVariableTests()
+        {
+            const string foo = "%localappdata%";
+            var fooP = Environment.ExpandEnvironmentVariables(foo);
+            fooP.Should().NotBe(foo);
+            Console.WriteLine($@"{foo} => {fooP}");
+
+            Environment.ExpandEnvironmentVariables(string.Empty).Should().BeEmpty();
         }
     }
 }

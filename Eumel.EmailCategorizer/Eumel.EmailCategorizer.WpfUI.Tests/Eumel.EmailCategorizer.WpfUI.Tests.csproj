@@ -63,6 +63,7 @@
     <Compile Include="EditCategoriesWindow_Should.cs" />
     <Compile Include="EditSettingsWindow_Should.cs" />
     <Compile Include="EmailSubjectWindow_Should.cs" />
+    <Compile Include="EumelConfigManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryAccessTests.cs" />
     <Compile Include="WpfWindowBaseTest.cs" />
