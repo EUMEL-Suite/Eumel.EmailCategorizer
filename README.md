@@ -24,5 +24,5 @@ The first option provides a dialog to edit the categories, which are stored duri
 
 The second option provides a dialog to edit the settings
 
-![Settings Editor](/Assets/eumel_settingseditor.png?raw=true)
+![Settings Editor](/Assets/eumel_editsettings.png?raw=true)
 
