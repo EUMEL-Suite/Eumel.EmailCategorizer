@@ -13,9 +13,8 @@ namespace Eumel.EmailCategorizer.WpfUI.Storage
 
         public JsonFileEumelStorage(string storageFolder = null)
         {
-            var folder = storageFolder ?? string.Empty;
-            if (storageFolder.IsNullOrWhiteSpace())
-                folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Eumel Suite");
+            var defaultValue = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EUMEL Suite");
+            var folder = Environment.ExpandEnvironmentVariables(storageFolder ?? defaultValue);
 
             Directory.CreateDirectory(folder);
             _filename = Path.Combine(folder, ConfigFile);
@@ -23,10 +22,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Storage
             if (File.Exists(_filename))
                 Load();
             else
-            {
-                _settings["Eumel.Categorizer.ConfigStore"] = nameof(JsonFileEumelStorage); // at least the config should contain itself as config store
                 Save();
-            }
         }
 
         private void Save()

@@ -9,7 +9,9 @@ namespace Eumel.EmailCategorizer.WpfUI.Storage
 
         public FileEumelStorage(string storageFolder = null)
         {
-            _folder = storageFolder ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Eumel Suite");
+            var defaultValue = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EUMEL Suite");
+            _folder = Environment.ExpandEnvironmentVariables(storageFolder ?? defaultValue);
+            Directory.CreateDirectory(_folder);
         }
         public bool IsReadOnly { get; } = false;
 

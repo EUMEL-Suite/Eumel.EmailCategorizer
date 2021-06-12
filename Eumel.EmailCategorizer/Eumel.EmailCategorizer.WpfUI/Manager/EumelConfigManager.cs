@@ -31,7 +31,9 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
                 UseOutlookPst = bool.Parse(_storage[ConfigStorePrefix + nameof(ConfigModel.UseOutlookPst)] ?? "false"),
                 UsePlainFileStorage = bool.Parse(_storage[ConfigStorePrefix + nameof(ConfigModel.UsePlainFileStorage)] ?? "false"),
                 HttpSource = _storage[ConfigStorePrefix + nameof(ConfigModel.HttpSource)],
-                WriteStorage = _storage[ConfigStorePrefix + nameof(ConfigModel.WriteStorage)]
+                WriteStorage = _storage[ConfigStorePrefix + nameof(ConfigModel.WriteStorage)],
+                CategoryPrefix = _storage[ConfigStorePrefix + nameof(ConfigModel.CategoryPrefix)],
+                CategoryPostfix = _storage[ConfigStorePrefix + nameof(ConfigModel.CategoryPostfix)]
             };
         }
 
@@ -40,6 +42,9 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
             // TODO MAKE THIS GENERIC
             _storage[ConfigStorePrefix + nameof(ConfigModel.ForwardMarker)] = string.Join(Separator, config.ForwardMarker);
             _storage[ConfigStorePrefix + nameof(ConfigModel.ReplyMarker)] = string.Join(Separator, config.ReplyMarker);
+            _storage[ConfigStorePrefix + nameof(ConfigModel.CategoryPrefix)] = string.Join(Separator, config.CategoryPrefix);
+            _storage[ConfigStorePrefix + nameof(ConfigModel.CategoryPostfix)] = string.Join(Separator, config.CategoryPostfix);
+
             _storage[ConfigStorePrefix + nameof(ConfigModel.UseHttpSource)] = config.UseHttpSource.ToString();
             _storage[ConfigStorePrefix + nameof(ConfigModel.UseJsonFileStorage)] = config.UseJsonFileStorage.ToString();
             _storage[ConfigStorePrefix + nameof(ConfigModel.UseOutlookPst)] = config.UseOutlookPst.ToString();

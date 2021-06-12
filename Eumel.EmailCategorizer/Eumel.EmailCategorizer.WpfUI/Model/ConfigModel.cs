@@ -18,6 +18,16 @@ namespace Eumel.EmailCategorizer.WpfUI.Model
         [Description("List of markers which are prefixed if an email is replied e.g. 'RE:'")]
         public List<string> ReplyMarker { get; set; }
 
+        [Category("Categories")]
+        [DisplayName("Category Start")]
+        [Description("Start marker of a category. Usually some opening tag like {, [, (, <")]
+        public string CategoryPrefix { get; set; }
+
+        [Category("Categories")]
+        [DisplayName("Category End")]
+        [Description("End marker of a category. Usually some closing tag like }, ], ), >")]
+        public string CategoryPostfix { get; set; }
+
         [Category("Storage")]
         [DisplayName("Use Outlook PST file")]
         [Description("Use the Outlook PST file to read categories")]
@@ -63,8 +73,12 @@ namespace Eumel.EmailCategorizer.WpfUI.Model
                 UseOutlookPst = false,
                 UsePlainFileStorage = false,
                 UseHttpSource = false,
+                UseJsonFileStorage = false,
+                StorageFolder = "%localappdata%\\EUMEL Suite",
                 ReplyMarker = new List<string>() {"RE:", "AW:"},
-                ForwardMarker = new List<string>() {"FW:", "WG:"}
+                ForwardMarker = new List<string>() {"FW:", "WG:"},
+                CategoryPrefix = "[",
+                CategoryPostfix = "]"
             };
         }
     }
