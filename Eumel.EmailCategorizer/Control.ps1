@@ -16,7 +16,7 @@ $msbuild = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuil
 
 
 $compress = @{
-  Path = ".\Eumel.EmailCategorizer.Outlook\bin\Debug\app.publish\*"
+  Path = "..\publish\*"
   CompressionLevel = "Fastest"
   DestinationPath = "..\Eumel.EmailCategorizer.$($fullVersion).Zip"
 }
