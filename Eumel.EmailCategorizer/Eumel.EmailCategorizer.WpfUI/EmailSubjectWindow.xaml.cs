@@ -49,20 +49,31 @@ namespace Eumel.EmailCategorizer.WpfUI
 
         private static void SubjectChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var window = sender as EmailSubjectWindow ??
-                         throw new ArgumentNullException(nameof(sender), @"sender is not an EmailSubjectWindow");
-            var newValue = e.NewValue as EnhancedSubject ?? new EnhancedSubject("");
+            var window = sender as EmailSubjectWindow ?? throw new ArgumentNullException(nameof(sender), @"sender is not an EmailSubjectWindow");
+            var cfg = window.ConfigManager.GetConfig();
+            var newValue = e.NewValue as EnhancedSubject ?? new EnhancedSubject("", cfg.CategoryPrefix, cfg.CategoryPostfix);
+            var reFw = cfg.ForwardMarker.Concat(cfg.ReplyMarker);
+            window.AddToList.IsChecked = !reFw.Any(x => newValue.Subject.Contains(x));
             window.Category.Text = newValue.Category;
             window.MailSubject.Text = newValue.Subject;
         }
 
         public EnhancedSubject Subject
         {
-            get => (EnhancedSubject) GetValue(SubjectProperty);
+            get => (EnhancedSubject)GetValue(SubjectProperty);
             set => SetValue(SubjectProperty, value);
         }
 
         #endregion
+
+        public static readonly DependencyProperty ConfigManagerProperty = DependencyProperty.Register(
+            "ConfigManager", typeof(IEumelConfigManager), typeof(EmailSubjectWindow), new PropertyMetadata(default(IEumelConfigManager)));
+
+        public IEumelConfigManager ConfigManager
+        {
+            get => (IEumelConfigManager)GetValue(ConfigManagerProperty);
+            set => SetValue(ConfigManagerProperty, value);
+        }
 
         #region CategoryManager
 
@@ -82,7 +93,7 @@ namespace Eumel.EmailCategorizer.WpfUI
 
         public IEumelCategoryManager CategoryManager
         {
-            get => (IEumelCategoryManager) GetValue(CategoryManagerProperty);
+            get => (IEumelCategoryManager)GetValue(CategoryManagerProperty);
             set => SetValue(CategoryManagerProperty, value);
         }
 

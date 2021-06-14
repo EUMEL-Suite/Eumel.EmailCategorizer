@@ -20,7 +20,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
 
             var window = new EmailSubjectWindow
             {
-                Subject = new EnhancedSubject("Fwd: [Eumel] Regression Test Pattern"),
+                Subject = new EnhancedSubject("Fwd: [Eumel] Regression Test Pattern", "[", "]"),
                 CategoryManager = categoryManager
             };
 
@@ -36,7 +36,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
 
             var window = new EmailSubjectWindow
             {
-                Subject = new EnhancedSubject("Fwd: [Eumel] Regression Test Pattern"),
+                Subject = new EnhancedSubject("Fwd: [Eumel] Regression Test Pattern", "[", "]"),
                 CategoryManager = categoryManager
             };
             window.Show();

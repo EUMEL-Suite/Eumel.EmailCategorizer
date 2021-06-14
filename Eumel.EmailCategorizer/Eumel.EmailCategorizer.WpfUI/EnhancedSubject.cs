@@ -2,13 +2,15 @@
 {
     public class EnhancedSubject
     {
-        private const string Opening = "[";
-        private const string Closing = "]";
+        private readonly string _opening;
+        private readonly string _closing;
         private readonly string _originalSubject;
 
-        public EnhancedSubject(string subject)
+        public EnhancedSubject(string subject, string opening, string closing)
         {
             _originalSubject = subject;
+            _opening = opening;
+            _closing = closing;
             Parse(subject ?? string.Empty);
         }
 
@@ -20,17 +22,17 @@
         {
             return Category.IsNullOrWhiteSpace()
                 ? Subject
-                : $"{Opening}{Category}{Closing} {Subject}";
+                : $"{_opening}{Category}{_closing} {Subject}";
         }
 
         private void Parse(string subject)
         {
             // get topic of email and remove topic
-            Category = subject.Between(Opening, Closing).Trim();
+            Category = subject.Between(_opening, _closing).Trim();
 
             // get subject w/o topic
             Subject = subject
-                .Replace(Opening + Category + Closing, "")
+                .Replace(_opening + Category + _closing, "")
                 .Trim()
                 .Replace("  ", " ").Replace("  ", " "); // replace all multiple spaces.
         }

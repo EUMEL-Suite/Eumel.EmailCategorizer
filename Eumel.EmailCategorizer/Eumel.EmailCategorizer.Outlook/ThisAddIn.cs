@@ -94,10 +94,11 @@ namespace Eumel.EmailCategorizer.Outlook
             // since we only handle mail items
             if (!(item is MailItem mail)) return;
 
-            var email = new EnhancedMailItem(mail);
+            var email = new EnhancedMailItem(mail, _configManager);
 
             var window = new EmailSubjectWindow
             {
+                ConfigManager = _configManager,
                 Subject = email.Subject,
                 CategoryManager = _categoryManager
             };

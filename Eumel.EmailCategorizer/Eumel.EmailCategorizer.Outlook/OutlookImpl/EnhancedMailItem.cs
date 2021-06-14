@@ -1,5 +1,6 @@
 ﻿using System;
 using Eumel.EmailCategorizer.WpfUI;
+using Eumel.EmailCategorizer.WpfUI.Manager;
 using Microsoft.Office.Interop.Outlook;
 
 namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
@@ -8,11 +9,12 @@ namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
     {
         private readonly MailItem _mail;
 
-        public EnhancedMailItem(MailItem mail)
+        public EnhancedMailItem(MailItem mail, IEumelConfigManager configManager)
         {
             _mail = mail ?? throw new ArgumentNullException(nameof(mail));
 
-            Subject = new EnhancedSubject(mail.Subject);
+            var cfg = configManager.GetConfig();
+            Subject = new EnhancedSubject(mail.Subject,cfg.CategoryPrefix, cfg.CategoryPostfix);
         }
 
         public EnhancedSubject Subject { get; }
