@@ -7,9 +7,11 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
 {
     public static class EumelConfigManagerExtensions
     {
-        public static IEumelStorage GetWriteStorage(this ConfigModel config, Dictionary<string, Func<string, IEumelStorage>> storageFactory)
+        public static IEumelStorage GetWriteStorage(this ConfigModel config,
+            Dictionary<string, Func<string, IEumelStorage>> storageFactory)
         {
-            return storageFactory[config.WriteStorage ?? string.Empty](config.GetConfigStoreSettingsForStore(config.WriteStorage));
+            return storageFactory[config.WriteStorage ?? string.Empty](
+                config.GetConfigStoreSettingsForStore(config.WriteStorage));
         }
 
         public static IEumelStorage[] GetReadStorages(this ConfigModel config,
@@ -27,7 +29,8 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
                 result.Add(storageFactory[nameof(FileEumelStorage)](config.StorageFolder));
 
             if (config.UseOutlookPst)
-                result.Add(storageFactory["OutlookEumelStorage"](config.StorageFolder)); // magic that I know this one exists
+                result.Add(storageFactory["OutlookEumelStorage"](config
+                    .StorageFolder)); // magic that I know this one exists
 
             return result.ToArray();
         }
@@ -45,7 +48,6 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
                 default:
                     return null;
             }
-
         }
     }
 }

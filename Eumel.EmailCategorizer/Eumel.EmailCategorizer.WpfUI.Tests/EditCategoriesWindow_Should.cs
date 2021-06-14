@@ -15,11 +15,11 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
         [Apartment(ApartmentState.STA)]
         public void OpenWindow_ClearAtLeastOne_Except_EumelCategories()
         {
-            var items = new[] { "Categorizer", "Domse", "CodeQualityCoach", "Training", "GitHub", "Protography" };
+            var items = new[] {"Categorizer", "Domse", "CodeQualityCoach", "Training", "GitHub", "Protography"};
             var categoryManager = Substitute.For<IEumelCategoryManager>();
             categoryManager.Get().ReturnsForAnyArgs(items);
 
-            var window = new EditCategoriesWindow()
+            var window = new EditCategoriesWindow
             {
                 CategoryManager = categoryManager
             };
@@ -36,16 +36,16 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
             categoryManager.Received().Add("Domse");
             categoryManager.Received().Delete("GitHub");
         }
-        
+
         [Test]
         [Apartment(ApartmentState.STA)]
         public void OpenWindow_And_Make_ScreenShot()
         {
-            var items = new[] { "Categorizer", "Domse", "CodeQualityCoach", "Training", "GitHub", "Protography" };
+            var items = new[] {"Categorizer", "Domse", "CodeQualityCoach", "Training", "GitHub", "Protography"};
             var categoryManager = Substitute.For<IEumelCategoryManager>();
             categoryManager.Get().ReturnsForAnyArgs(items);
 
-            var window = new EditCategoriesWindow()
+            var window = new EditCategoriesWindow
             {
                 CategoryManager = categoryManager
             };

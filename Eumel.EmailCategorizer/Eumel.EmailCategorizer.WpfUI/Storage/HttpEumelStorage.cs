@@ -14,23 +14,24 @@ namespace Eumel.EmailCategorizer.WpfUI.Storage
         {
             try
             {
-                var request = (HttpWebRequest)WebRequest.Create(source);
+                var request = (HttpWebRequest) WebRequest.Create(source);
                 request.AutomaticDecompression = DecompressionMethods.GZip;
 
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                using (Stream stream = response.GetResponseStream())
-                using (StreamReader reader = new StreamReader(stream))
+                using (var response = (HttpWebResponse) request.GetResponse())
+                using (var stream = response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
                     _data = reader
                         .ReadToEnd()
-                        .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                        .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
                         .Select(x => x.Split('='))
                         .Where(x => x.Length == 2)
                         .ToDictionary(x => x[0].ToLower(), x => x[1]);
-
+                }
             }
             catch (Exception ex)
             {
-                _data = new Dictionary<string, string> { { "Error", ex.Message } };
+                _data = new Dictionary<string, string> {{"Error", ex.Message}};
             }
         }
 
@@ -42,6 +43,10 @@ namespace Eumel.EmailCategorizer.WpfUI.Storage
                 ? _data[name]
                 : string.Empty;
             set => throw new NotImplementedException();
+        }
+
+        public void Clear()
+        {
         }
     }
 }

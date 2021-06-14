@@ -71,6 +71,8 @@
     <Compile Include="EditSettingsWindow.xaml.cs">
       <DependentUpon>EditSettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileLogger.cs" />
+    <Compile Include="IEumelLogger.cs" />
     <Compile Include="Manager\EumelAggregateCategoryManager.cs" />
     <Compile Include="Manager\EumelConfigManager.cs" />
     <Compile Include="Manager\EumelConfigManagerExtensions.cs" />

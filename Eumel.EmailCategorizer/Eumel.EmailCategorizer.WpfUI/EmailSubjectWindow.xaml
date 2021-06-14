@@ -28,8 +28,11 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4"
                     Grid.ColumnSpan="2" Height="35">
-            <Button Width="105" Margin="4 0 0 0"  Click="UndoParse" ToolTip="Undo subject analysis and use original subject">Undo</Button>
-            <Button Width="105" Margin="4 0 0 0"  Click="CancelButton">Cancel</Button>
+            <Button Width="105" Margin="4 0 0 0" Click="UndoParse"
+                    ToolTip="Undo subject analysis and use original subject">
+                Undo
+            </Button>
+            <Button Width="105" Margin="4 0 0 0" Click="CancelButton">Cancel</Button>
             <Button Width="105" Margin="4 0 0 0" Click="SendButton" IsDefault="True">Send</Button>
         </StackPanel>
     </Grid>

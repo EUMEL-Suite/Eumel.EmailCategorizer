@@ -22,3 +22,22 @@ $compress = @{
 }
 Compress-Archive @compress -Force
 
+# Magical Thing to Know
+
+# Not sure if I need this
+# Set-ItemProperty -Path 'HKCU:\SOFTWARE\EUMEL Suite\' -Name "Eumel.FirstStart" -Value 1
+# Remove-ItemProperty -Path 'HKCU:\SOFTWARE\EUMEL Suite\' -Name "Eumel.FirstStart"
+
+
+# This clears everything on startup
+# Set-ItemProperty -Path 'HKCU:\SOFTWARE\EUMEL Suite\' -Name "Eumel.ClearOnStart" -Value 1
+
+# Get-Item 'Registry::HKEY_CURRENT_USER\SOFTWARE\EUMEL Suite\' | Select-Object -ExpandProperty Property
+
+#     Hive: HKEY_CURRENT_USER\SOFTWARE
+# 
+# Name                           Property
+# ----                           --------
+# EUMEL Suite                    Eumel.ConfigStore         : JsonFileEumelStorage
+#                                Eumel.ConfigStoreSettings :
+#                                Eumel.ClearOnStart        : 1

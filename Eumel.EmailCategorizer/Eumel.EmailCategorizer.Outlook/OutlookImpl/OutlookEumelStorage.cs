@@ -32,7 +32,7 @@ namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
             }
             set
             {
-                var prop = (UserProperty)null;
+                var prop = (UserProperty) null;
 
                 foreach (UserProperty item in _storage.UserProperties)
                     if (string.Compare(name, item.Name, StringComparison.InvariantCultureIgnoreCase) == 0)
@@ -47,6 +47,13 @@ namespace Eumel.EmailCategorizer.Outlook.OutlookImpl
                 prop.Value = value;
                 _storage.Save();
             }
+        }
+
+        public void Clear()
+        {
+            foreach (UserProperty item in _storage.UserProperties)
+                item.Delete();
+            _storage.Save();
         }
     }
 }

@@ -16,14 +16,14 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
         public void Open_Window()
         {
             var categoryManager = Substitute.For<IEumelCategoryManager>();
-            categoryManager.Get().ReturnsForAnyArgs(new[] { "Categorizer", "Domse", "Foo1", "Foo2", "Bar1", "Bar2" });
+            categoryManager.Get().ReturnsForAnyArgs(new[] {"Categorizer", "Domse", "Foo1", "Foo2", "Bar1", "Bar2"});
 
             var window = new EmailSubjectWindow
             {
                 Subject = new EnhancedSubject("Fwd: [Eumel] Regression Test Pattern"),
                 CategoryManager = categoryManager
             };
-            
+
             window.ShowDialog();
         }
 
@@ -32,7 +32,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
         public void Open_Window_And_Make_ScreenShot()
         {
             var categoryManager = Substitute.For<IEumelCategoryManager>();
-            categoryManager.Get().ReturnsForAnyArgs(new[] { "Categorizer", "Domse", "Foo1", "Foo2", "Bar1", "Bar2" });
+            categoryManager.Get().ReturnsForAnyArgs(new[] {"Categorizer", "Domse", "Foo1", "Foo2", "Bar1", "Bar2"});
 
             var window = new EmailSubjectWindow
             {
@@ -44,6 +44,5 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
             CreateBitmapFromVisual(window, Assets + "eumel_subjecteditor.png");
             window.Hide();
         }
-
     }
 }

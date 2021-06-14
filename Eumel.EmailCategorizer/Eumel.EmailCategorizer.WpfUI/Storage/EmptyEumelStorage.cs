@@ -9,5 +9,9 @@
             get => null;
             set { }
         }
+
+        public void Clear()
+        {
+        }
     }
 }

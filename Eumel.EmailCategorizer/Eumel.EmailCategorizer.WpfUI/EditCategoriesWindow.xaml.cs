@@ -12,51 +12,10 @@ using Eumel.EmailCategorizer.WpfUI.Model;
 namespace Eumel.EmailCategorizer.WpfUI
 {
     /// <summary>
-    /// Interaction logic for EditCategoriesWindow.xaml
+    ///     Interaction logic for EditCategoriesWindow.xaml
     /// </summary>
     public partial class EditCategoriesWindow : Window
     {
-        #region CategoryManager
-
-        public static readonly DependencyProperty CategoryManagerProperty = DependencyProperty.Register(
-            "CategoryManager", typeof(IEumelCategoryManager), typeof(EditCategoriesWindow),
-            new PropertyMetadata(default(IEumelCategoryManager), CategoryManagerChanged));
-
-        private static void CategoryManagerChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            var window = sender as EditCategoriesWindow ??
-                         throw new ArgumentNullException(nameof(sender), @"sender is not an EditCategoriesWindow");
-            var newValue = e.NewValue as IEumelCategoryManager ?? throw new ArgumentNullException(nameof(e.NewValue));
-
-            window.Categories = new ObservableCollection<CategoryModel>(
-                newValue.Get().Select(x => new CategoryModel() { Name = x }));
-            CommandManager.InvalidateRequerySuggested();
-        }
-
-        public IEumelCategoryManager CategoryManager
-        {
-            get => (IEumelCategoryManager)GetValue(CategoryManagerProperty);
-            set => SetValue(CategoryManagerProperty, value);
-        }
-
-
-        #endregion CategoryManager
-
-        #region Categories
-
-        public static readonly DependencyProperty CategoriesProperty = DependencyProperty.Register(
-            "Categories", typeof(ObservableCollection<CategoryModel>), typeof(EditCategoriesWindow), new PropertyMetadata(default(ObservableCollection<CategoryModel>)));
-
-        private readonly IList<CategoryModel> _deletedCategories = new List<CategoryModel>();
-
-        public ObservableCollection<CategoryModel> Categories
-        {
-            get => (ObservableCollection<CategoryModel>)GetValue(CategoriesProperty);
-            set => SetValue(CategoriesProperty, value);
-        }
-
-        #endregion Categories
-
         public EditCategoriesWindow()
         {
             InitializeComponent();
@@ -82,17 +41,14 @@ namespace Eumel.EmailCategorizer.WpfUI
 
         private void DeleteCategory(object sender, RoutedEventArgs e)
         {
-            DependencyObject dep = (DependencyObject)e.OriginalSource;
+            var dep = (DependencyObject) e.OriginalSource;
 
-            while ((dep != null) && !(dep is ListViewItem))
-            {
-                dep = VisualTreeHelper.GetParent(dep);
-            }
+            while (dep != null && !(dep is ListViewItem)) dep = VisualTreeHelper.GetParent(dep);
 
             if (dep == null)
                 return;
 
-            int index = CategoryList.ItemContainerGenerator.IndexFromContainer(dep);
+            var index = CategoryList.ItemContainerGenerator.IndexFromContainer(dep);
             _deletedCategories.Add(Categories.ElementAt(index));
             Categories.RemoveAt(index);
         }
@@ -101,5 +57,46 @@ namespace Eumel.EmailCategorizer.WpfUI
         {
             Categories.Clear();
         }
+
+        #region CategoryManager
+
+        public static readonly DependencyProperty CategoryManagerProperty = DependencyProperty.Register(
+            "CategoryManager", typeof(IEumelCategoryManager), typeof(EditCategoriesWindow),
+            new PropertyMetadata(default(IEumelCategoryManager), CategoryManagerChanged));
+
+        private static void CategoryManagerChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var window = sender as EditCategoriesWindow ??
+                         throw new ArgumentNullException(nameof(sender), @"sender is not an EditCategoriesWindow");
+            var newValue = e.NewValue as IEumelCategoryManager ?? throw new ArgumentNullException(nameof(e.NewValue));
+
+            window.Categories = new ObservableCollection<CategoryModel>(
+                newValue.Get().Select(x => new CategoryModel {Name = x}));
+            CommandManager.InvalidateRequerySuggested();
+        }
+
+        public IEumelCategoryManager CategoryManager
+        {
+            get => (IEumelCategoryManager) GetValue(CategoryManagerProperty);
+            set => SetValue(CategoryManagerProperty, value);
+        }
+
+        #endregion CategoryManager
+
+        #region Categories
+
+        public static readonly DependencyProperty CategoriesProperty = DependencyProperty.Register(
+            "Categories", typeof(ObservableCollection<CategoryModel>), typeof(EditCategoriesWindow),
+            new PropertyMetadata(default(ObservableCollection<CategoryModel>)));
+
+        private readonly IList<CategoryModel> _deletedCategories = new List<CategoryModel>();
+
+        public ObservableCollection<CategoryModel> Categories
+        {
+            get => (ObservableCollection<CategoryModel>) GetValue(CategoriesProperty);
+            set => SetValue(CategoriesProperty, value);
+        }
+
+        #endregion Categories
     }
 }

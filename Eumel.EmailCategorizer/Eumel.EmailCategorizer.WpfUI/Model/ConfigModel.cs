@@ -7,7 +7,6 @@ namespace Eumel.EmailCategorizer.WpfUI.Model
 {
     public class ConfigModel
     {
-
         [Category("Categories")]
         [DisplayName("List of Forward Marker")]
         [Description("List of markers which are prefixed if an email is forwarded e.g. 'FW:'")]
@@ -47,7 +46,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Model
         [DisplayName("Use HTTP/S source")]
         [Description("Use a http or https source which contains the data.")]
         public bool UseHttpSource { get; set; }
- 
+
         [Category("Storage")]
         [DisplayName("HTTP/S URI")]
         [Description("Endpoint for the HTTP storage")]
@@ -58,27 +57,29 @@ namespace Eumel.EmailCategorizer.WpfUI.Model
         [DisplayName("Storage Folder")]
         [Description("Local folder to store configuration. Default: %localappdata%")]
         public string StorageFolder { get; set; }
-        
+
         [Category("Storage")]
         [DisplayName("Write Storage")]
-        [Description("Storage or Endpoint which is used to store data. The write storage is always used as read source, too.")]
+        [Description(
+            "Storage or Endpoint which is used to store data. The write storage is always used as read source, too.")]
         [ItemsSource(typeof(EumelStorageWriteSources))]
         public string WriteStorage { get; set; }
 
         public static ConfigModel Default()
         {
-            return new ConfigModel()
+            return new ConfigModel
             {
                 WriteStorage = nameof(JsonFileEumelStorage),
                 UseOutlookPst = false,
                 UsePlainFileStorage = false,
                 UseHttpSource = false,
                 UseJsonFileStorage = false,
-                StorageFolder = "%localappdata%\\EUMEL Suite",
-                ReplyMarker = new List<string>() {"RE:", "AW:"},
-                ForwardMarker = new List<string>() {"FW:", "WG:"},
+                StorageFolder = "%LocalAppData%\\EUMEL Suite",
+                ReplyMarker = new List<string> { "RE:", "AW:" },
+                ForwardMarker = new List<string> { "FW:", "WG:" },
                 CategoryPrefix = "[",
-                CategoryPostfix = "]"
+                CategoryPostfix = "]",
+                HttpSource = string.Empty
             };
         }
     }

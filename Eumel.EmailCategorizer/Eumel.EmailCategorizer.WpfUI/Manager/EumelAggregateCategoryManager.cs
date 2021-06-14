@@ -7,23 +7,22 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
 {
     public class EumelAggregateCategoryManager : IEumelCategoryManager
     {
-
-        private readonly IEumelCategoryManager _readWriteStorage;
         private readonly IDictionary<IEumelCategoryManager, IEnumerable<string>> _readStorageCache;
 
         public EumelAggregateCategoryManager(IEumelStorage readWriteStorage, params IEumelStorage[] readStorage)
         {
             if (readWriteStorage == null) throw new ArgumentNullException(nameof(readWriteStorage));
 
-            _readWriteStorage = new EumelCategoryManager(readWriteStorage);
+            ReadWriteManager = new EumelCategoryManager(readWriteStorage);
             _readStorageCache = (readStorage ?? Enumerable.Empty<IEumelStorage>())
                 .Select(x => new EumelCategoryManager(x))
-                .ToDictionary(x => (IEumelCategoryManager)x, x => Enumerable.Empty<string>());
-            _readStorageCache.Add(_readWriteStorage, Enumerable.Empty<string>());
+                .ToDictionary(x => (IEumelCategoryManager) x, x => Enumerable.Empty<string>());
+            _readStorageCache.Add(ReadWriteManager, Enumerable.Empty<string>());
         }
 
-        public bool IsReadOnly => _readWriteStorage != null;
-        public IEumelCategoryManager ReadWriteManager => _readWriteStorage;
+        public IEumelCategoryManager ReadWriteManager { get; }
+
+        public bool IsReadOnly => ReadWriteManager != null;
 
         public void Add(string category)
         {
@@ -31,7 +30,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
             var lst = _readStorageCache.Values.SelectMany(x => x);
             if (lst.Contains(category, StringComparer.CurrentCultureIgnoreCase)) return;
 
-            _readWriteStorage.Add(category);
+            ReadWriteManager.Add(category);
         }
 
         public void Delete(string category)
@@ -40,7 +39,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
             var lst = _readStorageCache.Values.SelectMany(x => x);
             if (lst.Contains(category, StringComparer.CurrentCultureIgnoreCase)) return;
 
-            _readWriteStorage.Delete(category);
+            ReadWriteManager.Delete(category);
         }
 
         public IEnumerable<string> Get()

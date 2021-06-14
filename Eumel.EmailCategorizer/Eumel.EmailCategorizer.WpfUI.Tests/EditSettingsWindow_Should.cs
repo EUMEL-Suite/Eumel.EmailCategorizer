@@ -14,7 +14,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
         [Apartment(ApartmentState.STA)]
         public void Open_Window()
         {
-            var window = new EditSettingsWindow()
+            var window = new EditSettingsWindow
             {
                 Config = ConfigModel.Default()
             };
@@ -25,7 +25,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
         [Apartment(ApartmentState.STA)]
         public void Open_Window_And_Make_ScreenShot()
         {
-            var window = new EditSettingsWindow()
+            var window = new EditSettingsWindow
             {
                 Config = ConfigModel.Default()
             };

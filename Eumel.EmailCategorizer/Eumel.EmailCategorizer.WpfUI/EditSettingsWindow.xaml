@@ -19,10 +19,10 @@
 
         <xctk:PropertyGrid Name="PropertyEditor" AutoGenerateProperties="True"
                            ShowSearchBox="True" ShowSortOptions="True" ShowTitle="False"
-                           Grid.ColumnSpan="2" Margin="0 0 0 4">
-        </xctk:PropertyGrid>
+                           Grid.ColumnSpan="2" Margin="0 0 0 4" />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" Height="35">
+            <Button Width="105" Click="ClearButton" ToolTip="Clear all settings from ALL available storages">Clear</Button>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1" Height="35">

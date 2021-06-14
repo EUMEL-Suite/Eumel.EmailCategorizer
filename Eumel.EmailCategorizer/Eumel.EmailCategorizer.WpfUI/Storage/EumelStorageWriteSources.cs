@@ -6,11 +6,13 @@ namespace Eumel.EmailCategorizer.WpfUI.Storage
     {
         public ItemCollection GetValues()
         {
-            var result = new ItemCollection();
-            result.Add(nameof(FileEumelStorage));
-            result.Add(nameof(JsonFileEumelStorage));
-            result.Add(nameof(RegistryEumelStorage));
-            result.Add("OutlookEumelStorage");
+            var result = new ItemCollection
+            {
+                nameof(FileEumelStorage),
+                nameof(JsonFileEumelStorage),
+                nameof(RegistryEumelStorage),
+                "OutlookEumelStorage"
+            };
 
             return result;
         }

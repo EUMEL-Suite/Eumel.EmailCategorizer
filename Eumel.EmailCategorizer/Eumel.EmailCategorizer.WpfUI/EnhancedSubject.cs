@@ -2,9 +2,9 @@
 {
     public class EnhancedSubject
     {
-        private string _originalSubject;
         private const string Opening = "[";
         private const string Closing = "]";
+        private readonly string _originalSubject;
 
         public EnhancedSubject(string subject)
         {

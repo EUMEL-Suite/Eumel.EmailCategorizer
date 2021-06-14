@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpfUi="clr-namespace:Eumel.EmailCategorizer.WpfUI"
-        d:DataContext="{d:DesignInstance Type=wpfUi:EditCategoriesWindow}" 
+        d:DataContext="{d:DesignInstance Type=wpfUi:EditCategoriesWindow}"
         mc:Ignorable="d"
         Title="EUMEL Category Editor" Height="450" Width="800">
     <Grid Margin="8">
@@ -18,8 +18,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ListView Name="CategoryList" 
-                  ItemsSource="{Binding Path=Categories, Mode=OneWay}" 
+        <ListView Name="CategoryList"
+                  ItemsSource="{Binding Path=Categories, Mode=OneWay}"
                   Grid.ColumnSpan="2" Margin="0 0 0 4">
             <ListView.View>
                 <GridView>
@@ -27,7 +27,7 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Delete" Click="DeleteCategory"/>
+                                <Button Content="Delete" Click="DeleteCategory" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

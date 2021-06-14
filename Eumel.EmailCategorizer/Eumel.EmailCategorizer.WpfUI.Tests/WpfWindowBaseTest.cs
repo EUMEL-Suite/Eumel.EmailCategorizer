@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -17,7 +16,7 @@ namespace Eumel.EmailCategorizer.WpfUI.Tests
             var bounds = VisualTreeHelper.GetDescendantBounds(target);
 
             var renderTarget =
-                new RenderTargetBitmap((int)bounds.Width, (int)bounds.Height, 96, 96, PixelFormats.Pbgra32);
+                new RenderTargetBitmap((int) bounds.Width, (int) bounds.Height, 96, 96, PixelFormats.Pbgra32);
 
             var visual = new DrawingVisual();
 

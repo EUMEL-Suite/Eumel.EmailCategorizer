@@ -4,8 +4,8 @@ using Eumel.EmailCategorizer.WpfUI.Storage;
 namespace Eumel.EmailCategorizer.WpfUI.Manager
 {
     /// <summary>
-    /// config manager just for initial settings. These are the initial settings to get the full settings provider.
-    /// For example the registry contains the information, that the settings are store in users "localappdata"
+    ///     config manager just for initial settings. These are the initial settings to get the full settings provider.
+    ///     For example the registry contains the information, that the settings are store in users "localappdata"
     /// </summary>
     public class InitConfigManager
     {
@@ -27,6 +27,12 @@ namespace Eumel.EmailCategorizer.WpfUI.Manager
         {
             get => _storage[ConfigStorePrefix + nameof(ConfigStoreSettings)];
             set => _storage[ConfigStorePrefix + nameof(ConfigStoreSettings)] = value;
+        }
+
+        public string ClearOnStart
+        {
+            get => _storage[ConfigStorePrefix + nameof(ClearOnStart)];
+            set => _storage[ConfigStorePrefix + nameof(ClearOnStart)] = value;
         }
     }
 }
