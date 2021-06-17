@@ -2,6 +2,8 @@
 
 The EUMEL email categorizer is an outlook add-in to tag or categorize email in its subject. The goal is sending an email with a prefixed subject to categorize emails before it is sent.
 
+A detailed documentation can be found in at [organization page](https://eumel-suite.github.io/pages/emailcategorizer.html).
+
 # Basic usage
 
 The email is written regilarily and can contain a category in brackets "[]". The subject is parsed for the category and added to the front of the subject.
