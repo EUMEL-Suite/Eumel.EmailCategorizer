@@ -35,7 +35,7 @@
     <PublishUrl>..\..\publish\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>0.3.1.0</ApplicationVersion>
+    <ApplicationVersion>0.3.2.0</ApplicationVersion>
     <AutoIncrementApplicationRevision>false</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -250,7 +250,7 @@
     <ManifestCertificateThumbprint>3FC2222CCB7CA4CFB1D352A1FFD01C12E15D32D8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>
